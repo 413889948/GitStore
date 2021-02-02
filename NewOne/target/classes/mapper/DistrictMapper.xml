@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.newone.demo.dao.mapper.DistrictMapper">
+
+    <select id="searchDistrict"
+            parameterType="com.sunsharing.newone.demo.entity.query.district.DistrictSearch"
+            resultType="com.sunsharing.newone.demo.entity.query.district.DistrictSearchResult">
+        SELECT * FROM t_ec_newone_district
+        <where>
+            <if test="definition != null  and definition != '' ">
+                DEFINITION = #{definition}
+            </if>
+            <if test="value != null  and value != '' ">
+                AND VALUE = #{value}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

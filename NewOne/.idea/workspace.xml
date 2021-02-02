@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="aed57f69-c86b-450d-8910-539c82541228" name="Default Changelist" comment="[新增][NewOne][后端模块]为前端管理员页面提供增删改查接口">
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/dao/mapper/DistrictMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/dao/mapper/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/entity/db/DistrictEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/entity/db/UserEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/entity/query/district/DistrictCreate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/entity/query/district/DistrictDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/entity/query/district/DistrictModify.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/entity/query/district/DistrictSearch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/entity/query/district/DistrictSearchResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/entity/query/user/UserCreate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/entity/query/user/UserDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/entity/query/user/UserModify.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/entity/query/user/UserSearch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/entity/query/user/UserSearchResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/service/DistrictService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/service/impl/DistrictServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/util/One2ManyUpdateDataHolder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/web/controller/DistrictController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/java/com/sunsharing/groupid/demo/web/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/resources/mapper/DistrictMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest/src/main/resources/mapper/UserMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest2/src/main/java/com/sunsharing/groupid/demo/dao/mapper/EcNewoneDistrictMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest2/src/main/java/com/sunsharing/groupid/demo/entity/db/EcNewoneDistrictEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest2/src/main/java/com/sunsharing/groupid/demo/entity/query/ecNewoneDistrict/EcNewoneDistrictCreate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest2/src/main/java/com/sunsharing/groupid/demo/entity/query/ecNewoneDistrict/EcNewoneDistrictDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest2/src/main/java/com/sunsharing/groupid/demo/entity/query/ecNewoneDistrict/EcNewoneDistrictModify.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest2/src/main/java/com/sunsharing/groupid/demo/entity/query/ecNewoneDistrict/EcNewoneDistrictSearch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest2/src/main/java/com/sunsharing/groupid/demo/entity/query/ecNewoneDistrict/EcNewoneDistrictSearchResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest2/src/main/java/com/sunsharing/groupid/demo/service/EcNewoneDistrictService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest2/src/main/java/com/sunsharing/groupid/demo/service/impl/EcNewoneDistrictServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest2/src/main/java/com/sunsharing/groupid/demo/util/One2ManyUpdateDataHolder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest2/src/main/java/com/sunsharing/groupid/demo/web/controller/EcNewoneDistrictController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest2/src/main/resources/mapper/EcNewoneDistrictMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest2/src/main/resources/sqlfile/Data.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AmoyTest2/src/main/resources/sqlfile/TestEvery.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/dao/mapper/DataMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/dao/mapper/DistrictMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/dao/mapper/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/entity/db/DataEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/entity/db/DistrictEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/entity/db/UserEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/entity/query/data/DataSearch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/entity/query/district/DistrictSearch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/entity/query/district/DistrictSearchResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/entity/query/user/UserCreate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/entity/query/user/UserDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/entity/query/user/UserModify.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/entity/query/user/UserSearch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/entity/query/user/UserSearchResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/service/DataService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/service/impl/DataServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/util/PasswordUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/util/RedisUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/web/controller/DataController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/web/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sunsharing/newone/demo/web/interceptor/PowerInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/DistrictMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NewOneReact/NewOneReact/src/pages/login/routes/Home.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaProject/ChangXiangProject/testnew" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaProject/ChangXiangProject/testnew" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$/.." source="master" />
+              </list>
+            </value>
+          </entry>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$/.." source="origin/master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="NewOne" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="E:\apache-maven-3.5.2-bin\apache-maven-3.5.2\maven_repository" />
+        <option name="mavenHome" value="E:/apache-maven-3.5.2-bin/apache-maven-3.5.2" />
+        <option name="userSettingsFile" value="E:\apache-maven-3.5.2-bin\apache-maven-3.5.2\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1mu1oWtzH5DbrdbOSDkIVGeyu1W" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="project.structure.last.edited" value="Problems" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="copyright.profiles" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.sunsharing.newone.demo.service.impl" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\window\个人学习\java\1A-JAVA\GitStore\NewOne" />
+      <recent name="G:\window\个人学习\java\1A-JAVA\GitStore\NewOne\src\main\java\com\sunsharing\newone\demo\service" />
+      <recent name="G:\window\个人学习\java\1A-JAVA\GitStore\NewOne\src\main\java\com\sunsharing\newone\demo\service\impl" />
+      <recent name="G:\window\个人学习\java\1A-JAVA\GitStore\NewOne\src\main\java\com\sunsharing\newone\demo\entity\query" />
+      <recent name="G:\window\个人学习\java\1A-JAVA\GitStore\NewOne\src\main\java\com\sunsharing\newone\demo\entity\db" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.DemoApplication">
+    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.sunsharing.newone.demo.web.controller.test" />
+      <module name="NewOne" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sunsharing.newone.demo.web.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="testmin" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.sunsharing.newone.demo.web.controller.testmin" />
+      <module name="NewOne" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sunsharing.newone.demo.web.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="NewOne" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sunsharing.newone.demo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.sunsharing.newone.demo" />
+      <option name="MAIN_CLASS_NAME" value="com.sunsharing.newone.demo.DemoApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoApplicationTests.contextLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="NewOne" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sunsharing.newone.demo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.sunsharing.newone.demo" />
+      <option name="MAIN_CLASS_NAME" value="com.sunsharing.newone.demo.DemoApplicationTests" />
+      <option name="METHOD_NAME" value="contextLoads" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="NewOne" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.sunsharing.newone.demo.DemoApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.DemoApplicationTests.contextLoads" />
+        <item itemvalue="JUnit.DemoApplicationTests" />
+        <item itemvalue="Application.test" />
+        <item itemvalue="Application.testmin" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="aed57f69-c86b-450d-8910-539c82541228" name="Default Changelist" comment="" />
+      <created>1610328836228</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1610328836228</updated>
+      <workItem from="1610328840287" duration="2046000" />
+      <workItem from="1610346531401" duration="847000" />
+      <workItem from="1610354536481" duration="2972000" />
+      <workItem from="1610419820092" duration="2442000" />
+      <workItem from="1611651770409" duration="741000" />
+      <workItem from="1611714579322" duration="13556000" />
+      <workItem from="1611737140427" duration="3313000" />
+      <workItem from="1611797049537" duration="1818000" />
+      <workItem from="1611816701120" duration="3322000" />
+      <workItem from="1611882810828" duration="7852000" />
+      <workItem from="1611900184692" duration="2582000" />
+      <workItem from="1611903675140" duration="5774000" />
+      <workItem from="1612140677509" duration="7564000" />
+      <workItem from="1612149998932" duration="7300000" />
+      <workItem from="1612227783883" duration="623000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="[新增][NewOne][后端模块]为前端管理员页面提供增删改查接口" />
+    <option name="LAST_COMMIT_MESSAGE" value="[新增][NewOne][后端模块]为前端管理员页面提供增删改查接口" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="292" y="102" key="#DemoApplication" timestamp="1610328992304">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="292" y="102" key="#DemoApplication/0.0.1536.834@0.0.1536.834" timestamp="1610328992304" />
+    <state x="361" y="76" key="#Inspections" timestamp="1611906819511">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="361" y="76" key="#Inspections/0.0.1536.834@0.0.1536.834" timestamp="1611906819511" />
+    <state x="574" y="127" key="#com.intellij.ide.util.MemberChooser" timestamp="1612143619209">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="574" y="127" key="#com.intellij.ide.util.MemberChooser/0.0.1536.834@0.0.1536.834" timestamp="1612143619209" />
+    <state x="362" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1611900856698">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="362" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.834@0.0.1536.834" timestamp="1611900856698" />
+    <state x="511" y="275" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1610355008707">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="511" y="275" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.834@0.0.1536.834" timestamp="1610355008707" />
+    <state x="345" y="10" key="CommitChangelistDialog2" timestamp="1612228464175">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="345" y="10" key="CommitChangelistDialog2/0.0.1536.834@0.0.1536.834" timestamp="1612228464175" />
+    <state x="549" y="172" key="FileChooserDialogImpl" timestamp="1612141094773">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="549" y="172" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1612141094773" />
+    <state width="1493" height="277" key="GridCell.Tab.0.bottom" timestamp="1612177527799">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1493" height="277" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1612177527799" />
+    <state width="1493" height="277" key="GridCell.Tab.0.center" timestamp="1612177527798">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1493" height="277" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1612177527798" />
+    <state width="1493" height="277" key="GridCell.Tab.0.left" timestamp="1612177527798">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1493" height="277" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1612177527798" />
+    <state width="1493" height="277" key="GridCell.Tab.0.right" timestamp="1612177527798">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1493" height="277" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1612177527798" />
+    <state width="1493" height="277" key="GridCell.Tab.1.bottom" timestamp="1612177527799">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1493" height="277" key="GridCell.Tab.1.bottom/0.0.1536.834@0.0.1536.834" timestamp="1612177527799" />
+    <state width="1493" height="277" key="GridCell.Tab.1.center" timestamp="1612177527799">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1493" height="277" key="GridCell.Tab.1.center/0.0.1536.834@0.0.1536.834" timestamp="1612177527799" />
+    <state width="1493" height="277" key="GridCell.Tab.1.left" timestamp="1612177527799">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1493" height="277" key="GridCell.Tab.1.left/0.0.1536.834@0.0.1536.834" timestamp="1612177527799" />
+    <state width="1493" height="277" key="GridCell.Tab.1.right" timestamp="1612177527799">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1493" height="277" key="GridCell.Tab.1.right/0.0.1536.834@0.0.1536.834" timestamp="1612177527799" />
+    <state width="1496" height="233" key="GridCell.Tab.2.bottom" timestamp="1612149990358">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1496" height="233" key="GridCell.Tab.2.bottom/0.0.1536.834@0.0.1536.834" timestamp="1612149990358" />
+    <state width="1496" height="233" key="GridCell.Tab.2.center" timestamp="1612149990357">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1496" height="233" key="GridCell.Tab.2.center/0.0.1536.834@0.0.1536.834" timestamp="1612149990357" />
+    <state width="1496" height="233" key="GridCell.Tab.2.left" timestamp="1612149990357">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1496" height="233" key="GridCell.Tab.2.left/0.0.1536.834@0.0.1536.834" timestamp="1612149990357" />
+    <state width="1496" height="233" key="GridCell.Tab.2.right" timestamp="1612149990357">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1496" height="233" key="GridCell.Tab.2.right/0.0.1536.834@0.0.1536.834" timestamp="1612149990357" />
+    <state x="270" y="0" key="SettingsEditor" timestamp="1610354846102">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="270" y="0" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1610354846102" />
+    <state x="361" y="150" key="Vcs.Push.Dialog.v2" timestamp="1612228489775">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="361" y="150" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1612228489775" />
+    <state x="489" y="135" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1611894199633">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="489" y="135" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1536.834@0.0.1536.834" timestamp="1611894199633" />
+    <state x="427" y="192" key="run.anything.popup" timestamp="1611906808656">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="427" y="192" key="run.anything.popup/0.0.1536.834@0.0.1536.834" timestamp="1611906808656" />
+  </component>
+</project>
