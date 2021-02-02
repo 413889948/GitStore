@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.newone.demo.dao.mapper.UserMapper">
+
+    <select id="searchUser"
+            parameterType="com.sunsharing.newone.demo.entity.query.user.UserSearch"
+            resultType="com.sunsharing.newone.demo.entity.query.user.UserSearchResult">
+        SELECT * FROM t_ec_newone_user
+        <where>
+                ZXBS = '0'
+            <if test="account != null  and account != '' ">
+                AND ACCOUNT = #{account}
+            </if>
+            <if test="password != null  and password != '' ">
+                AND PASSWORD = #{password}
+            </if>
+            <if test="phone != null  and phone != '' ">
+                AND PHONE = #{phone}
+            </if>
+            <if test="email != null  and email != '' ">
+                AND EMAIL = #{email}
+            </if>
+            <if test="createUserId != null  and createUserId != '' ">
+                AND CREATE_USER_ID = #{createUserId}
+            </if>
+            <if test="createTime != null ">
+                AND CREATE_TIME = #{createTime}
+            </if>
+            <if test="updateUserId != null  and updateUserId != '' ">
+                AND UPDATE_USER_ID = #{updateUserId}
+            </if>
+            <if test="updateTime != null ">
+                AND UPDATE_TIME = #{updateTime}
+            </if>
+            <if test="sex != null  and sex != '' ">
+                AND SEX = #{sex}
+            </if>
+            <if test="district != null  and district != '' ">
+                AND DISTRICT = #{district}
+            </if>
+            <if test="loginTime != null ">
+                AND LOGIN_TIME = #{loginTime}
+            </if>
+            <if test="zxbs != null  and zxbs != '' ">
+                AND ZXBS = #{zxbs}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

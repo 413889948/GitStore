@@ -1,0 +1,20 @@
+<ulynlist dataSource="">
+    <item>
+        <schemeId>data</schemeId>
+        <baseSql><![CDATA[
+
+            select DATA_UUID,DISTRICT_ID FROM T_EC_NEWONE_DATA ,T_EC_NEWONE_DISTRICT
+
+            ]]>
+        </baseSql>
+        <countSql></countSql>
+        <trans>
+            <tran fromField="DATA_UUID" toField="_cn_DATA_UUID">
+                <code p="EN_SEX"/>
+            </tran>
+            <tran fromField="DISTRICT_ID" toField="_cn_DISTRICT_ID">
+                <code p="EN_SEX"/>
+            </tran>
+        </trans>
+    </item>
+</ulynlist>

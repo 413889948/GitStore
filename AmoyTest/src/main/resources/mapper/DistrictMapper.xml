@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.groupid.demo.dao.mapper.DistrictMapper">
+
+    <select id="searchDistrict"
+            parameterType="com.sunsharing.groupid.demo.entity.query.district.DistrictSearch"
+            resultType="com.sunsharing.groupid.demo.entity.query.district.DistrictSearchResult">
+        SELECT * FROM T_EC_NEWONE_DISTRICT
+        <where>
+            <if test="districtName != null  and districtName != '' ">
+                DISTRICT_NAME = #{districtName}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

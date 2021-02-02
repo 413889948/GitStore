@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.groupid.demo.dao.mapper.EcNewoneDistrictMapper">
+
+    <select id="searchEcNewoneDistrict"
+            parameterType="com.sunsharing.groupid.demo.entity.query.ecNewoneDistrict.EcNewoneDistrictSearch"
+            resultType="com.sunsharing.groupid.demo.entity.query.ecNewoneDistrict.EcNewoneDistrictSearchResult">
+        SELECT * FROM T_EC_NEWONE_DISTRICT
+        <where>
+            <if test="districtName != null  and districtName != '' ">
+                DISTRICT_NAME LIKE CONCAT('%',#{districtName},'%')
+            </if>
+        </where>
+        ORDER BY DISTRICT_ID DESC
+    </select>
+
+
+</mapper>

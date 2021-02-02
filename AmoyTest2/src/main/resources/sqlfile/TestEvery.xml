@@ -1,0 +1,14 @@
+<ulynlist dataSource="">
+    <item>
+        <schemeId>testEvery</schemeId>
+        <baseSql><![CDATA[
+
+            select a.DEFINITION ,b.DEFINITION FROM t_ec_newone_district a  left outer join  t_ec_newone_data b on a.ID=b.ID
+
+            ]]>
+        </baseSql>
+        <countSql></countSql>
+        <trans>
+        </trans>
+    </item>
+</ulynlist>

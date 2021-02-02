@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.groupid.demo.dao.mapper.UserMapper">
+
+    <select id="searchUser"
+            parameterType="com.sunsharing.groupid.demo.entity.query.user.UserSearch"
+            resultType="com.sunsharing.groupid.demo.entity.query.user.UserSearchResult">
+        SELECT * FROM T_EC_NEWONE_ALLUSER
+        <where>
+            <if test="userSex != null  and userSex != '' ">
+                USER_SEX = #{userSex}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

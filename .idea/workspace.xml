@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3ff0766c-c154-4aa4-a694-6d2db1ab841b" name="Default Changelist" comment="">
+    <list default="true" id="3ff0766c-c154-4aa4-a694-6d2db1ab841b" name="Default Changelist" comment="新建分支dev">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <list id="e67552b2-483d-4864-8390-aa73512c0921" name="Revert &quot;测试1&quot;" comment="Revert &quot;测试1&quot;&#10;&#10;This reverts commit b914dd3f">
+      <change beforePath="$PROJECT_DIR$/JavaProject/ChangXiangProject/testnew" beforeDir="false" afterPath="$PROJECT_DIR$/JavaProject/ChangXiangProject/testnew" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -10,6 +13,31 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="master" />
+              </list>
+            </value>
+          </entry>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="origin/master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IgnoredFileRootStore">
@@ -65,7 +93,8 @@
       <workItem from="1609399232222" duration="57000" />
       <workItem from="1609399308495" duration="1067000" />
       <workItem from="1609403484491" duration="1671000" />
-      <workItem from="1609405275008" duration="243000" />
+      <workItem from="1609405275008" duration="3049000" />
+      <workItem from="1609411276031" duration="9000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1609399937608</created>
@@ -102,36 +131,128 @@
       <option name="project" value="LOCAL" />
       <updated>1609403845069</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="test">
+      <created>1609405666206</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1609405666206</updated>
+    </task>
+    <task id="LOCAL-00007" summary="test">
+      <created>1609405704866</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1609405704866</updated>
+    </task>
+    <task id="LOCAL-00008" summary="2.0s">
+      <created>1609406242301</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1609406242301</updated>
+    </task>
+    <task id="LOCAL-00009" summary="新建分支dev">
+      <created>1609406546930</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1609406546930</updated>
+    </task>
+    <task id="LOCAL-00010" summary="合并分支">
+      <created>1609406888009</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1609406888009</updated>
+    </task>
+    <task id="LOCAL-00011" summary="测试1">
+      <created>1609406998675</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1609406998675</updated>
+    </task>
+    <task id="LOCAL-00012" summary="子分支">
+      <created>1609407038778</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1609407038778</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Revert &quot;2.0s&quot;&#10;&#10;This reverts commit 521ec1cd">
+      <created>1609407585197</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1609407585197</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
+    <MESSAGE value="2.0s" />
+    <MESSAGE value="新建分支dev" />
+    <MESSAGE value="合并分支" />
+    <MESSAGE value="测试1" />
+    <MESSAGE value="子分支" />
+    <MESSAGE value="Revert &quot;2.0s&quot;&#10;&#10;This reverts commit 521ec1cd" />
+    <option name="LAST_COMMIT_MESSAGE" value="Revert &quot;2.0s&quot;&#10;&#10;This reverts commit 521ec1cd" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="464" y="21" key="CommitChangelistDialog2" timestamp="1609405665343">
+    <state x="387" y="199" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1609406191445">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="464" y="21" key="CommitChangelistDialog2/0.0.1536.834@0.0.1536.834" timestamp="1609405665343" />
-    <state x="139" y="83" key="DiffContextDialog" timestamp="1609400051569">
+    <state x="387" y="199" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.834@0.0.1536.834" timestamp="1609406191445" />
+    <state x="71" y="-8" width="950" height="813" key="CommitChangelistDialog2" timestamp="1609407584030">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="139" y="83" key="DiffContextDialog/0.0.1536.834@0.0.1536.834" timestamp="1609400051569" />
+    <state x="71" y="-8" width="950" height="813" key="CommitChangelistDialog2/0.0.1536.834@0.0.1536.834" timestamp="1609407584030" />
+    <state x="139" y="83" width="1228" height="694" key="DiffContextDialog" timestamp="1609407703323">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="139" y="83" width="1228" height="694" key="DiffContextDialog/0.0.1536.834@0.0.1536.834" timestamp="1609407703323" />
+    <state x="294" y="110" key="MergeDialog" timestamp="1609407555279">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="294" y="110" key="MergeDialog/0.0.1536.834@0.0.1536.834" timestamp="1609407555279" />
+    <state x="629" y="171" key="MultipleFileMergeDialog" timestamp="1609407577092">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="629" y="171" key="MultipleFileMergeDialog/0.0.1536.834@0.0.1536.834" timestamp="1609407577092" />
+    <state x="479" y="170" key="RollbackChangesDialog" timestamp="1609406578768">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="479" y="170" key="RollbackChangesDialog/0.0.1536.834@0.0.1536.834" timestamp="1609406578768" />
     <state x="79" y="119" key="SettingsEditor" timestamp="1609405655802">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="79" y="119" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1609405655802" />
-    <state x="353" y="162" key="Vcs.Push.Dialog.v2" timestamp="1609405673030">
+    <state x="353" y="162" key="Vcs.Push.Dialog.v2" timestamp="1609407630492">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="353" y="162" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1609405673030" />
-    <state x="1125" y="669" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1609399874699">
+    <state x="353" y="162" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1609407630492" />
+    <state x="432" y="372" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1609406569636">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="1125" y="669" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.834@0.0.1536.834" timestamp="1609399874699" />
+    <state x="432" y="372" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.834@0.0.1536.834" timestamp="1609406569636" />
+    <state x="530" y="129" key="git4idea.branch.GitSmartOperationDialog" timestamp="1609406983598">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="530" y="129" key="git4idea.branch.GitSmartOperationDialog/0.0.1536.834@0.0.1536.834" timestamp="1609406983598" />
   </component>
 </project>
