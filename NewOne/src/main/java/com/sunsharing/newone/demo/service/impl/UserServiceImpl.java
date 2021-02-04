@@ -1,7 +1,11 @@
 package com.sunsharing.newone.demo.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.sunsharing.newone.demo.constant.enums.MyResponseCode;
+import com.sunsharing.newone.demo.dao.mapper.AdministrateMapper;
 import com.sunsharing.newone.demo.dao.mapper.UserMapper;
+import com.sunsharing.newone.demo.entity.db.AdministrateEntity;
 import com.sunsharing.newone.demo.entity.db.UserEntity;
 import com.sunsharing.newone.demo.entity.query.user.UserCreate;
 import com.sunsharing.newone.demo.entity.query.user.UserDetail;
@@ -11,8 +15,11 @@ import com.sunsharing.newone.demo.util.PasswordUtil;
 import com.sunsharing.share.boot.framework.auth.User;
 import com.sunsharing.share.boot.framework.code.CodeLoader;
 import com.sunsharing.share.common.base.IdGenerator;
+import com.sunsharing.share.common.base.exception.ShareBusinessException;
+import com.sunsharing.share.common.base.exception.ShareResponseCode;
 import com.sunsharing.share.common.mapper.BeanMapper;
 import com.sunsharing.share.common.text.EncodeUtil;
+import com.sunsharing.share.common.text.TextValidator;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,14 +43,26 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     @Autowired
     private CodeLoader codeLoader;
 
+    @Autowired(required = false)
+    private AdministrateMapper administrateMapper;
 
-    @Transactional
-    public String addUser(UserCreate obj, User user) {
-
+    @Override
+    @Transactional(rollbackFor=Exception.class)
+    public String addUser(UserCreate obj,HttpSession session) {
+        UserEntity userEntity = getOne(new QueryWrapper<UserEntity>()
+            .eq("ACCOUNT",obj.getAccount())
+            .eq("ZXBS","0"));
+        if (userEntity != null) {
+            throw new ShareBusinessException(MyResponseCode.NAME_REPETITION);
+        }
         UserEntity entity = BeanMapper.map(obj, UserEntity.class);
-        entity.setCreateUserId(user.getId());
+        // 获取用户session数据进行验证
+        String account = (String) session.getAttribute("NEWONE_USER_ACCOUNT");
+        AdministrateEntity ae = administrateMapper.selectOne(new QueryWrapper<AdministrateEntity>().eq("ACCOUNT", account));
+        log.info(ae);
+        entity.setCreateUserId(ae.getUuid());
         entity.setCreateTime(LocalDateTime.now());
-        entity.setUpdateUserId(user.getId());
+        entity.setUpdateUserId(ae.getUuid());
         entity.setUpdateTime(LocalDateTime.now());
         // 警告原因是因为注解
         entity.setUuid(IdGenerator.uuid2());
@@ -54,16 +73,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         return entity.getUuid();
     }
 
-    @Transactional
-    public String updateUser(UserModify obj, User user) {
+    @Override
+    @Transactional(rollbackFor=Exception.class)
+    public String updateUser(UserModify obj,HttpSession session) {
         String id = obj.getUuid();
         UserEntity entity = getById(id);
-        entity.setUpdateUserId(user.getId());
+        BeanMapper.map(obj, entity);
+        TextValidator.isMobileExact(entity.getPhone());
+        TextValidator.isEmail(entity.getEmail());
+        String account = (String) session.getAttribute("NEWONE_USER_ACCOUNT");
+        AdministrateEntity ae = administrateMapper.selectOne(new QueryWrapper<AdministrateEntity>().eq("ACCOUNT", account));
+        entity.setUpdateUserId(ae.getUuid());
         entity.setUpdateTime(LocalDateTime.now());
         updateById(entity);
         return id;
     }
 
+    @Override
     public UserDetail getUser(String id) {
         UserEntity entity = getById(id);
         UserDetail detail = BeanMapper.map(entity, UserDetail.class);
@@ -72,6 +98,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         return detail;
     }
 
+    @Override
+    @Transactional(rollbackFor=Exception.class)
     public boolean deleteUser(List<String> ids) {
         return removeByIds(ids);
     }

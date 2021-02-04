@@ -14,11 +14,15 @@ import com.sunsharing.newone.demo.util.RedisUtil;
 import com.sunsharing.share.common.text.StringUtil;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import lombok.extern.slf4j.Slf4j;
 
 
 /**
@@ -26,25 +30,26 @@ import javax.servlet.http.HttpServletResponse;
  * @time 2021/1/29 15:11
  */
 @SuppressWarnings("checkstyle:Indentation")
+@Slf4j
+@Component
 public class PowerInterceptor implements HandlerInterceptor {
 
-    // @Resource
-    // private RedisUtil redisUtils;
+    @Resource
+    private RedisUtil redisUtils;
 
         @Override
         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-
             // 获取用户session数据进行验证
-            // String accounnt = (String) request.getSession().getAttribute("NEWONE_USER_ACCOUNT");
-            // String key = (String) request.getSession().getAttribute("NEWONE_USER_KEY");
-            //
-            // //获取redis信息进行验证
-            // String keyRedis = redisUtils.get("NEWONE_USER_LOGIN_" + accounnt);
-            //
-            // if (StringUtils.isNoneBlank(key,key) && StringUtils.equals(key,keyRedis)) {
-            //     return true;
-            // }
-            return true;
+            String accounnt = (String) request.getSession().getAttribute("NEWONE_USER_ACCOUNT");
+            String key = (String) request.getSession().getAttribute("NEWONE_USER_KEY");
+
+            //获取redis信息进行验证
+            String keyRedis = redisUtils.get("NEWONE_USER_LOGIN_" + accounnt);
+
+            if (StringUtils.isNoneBlank(key,keyRedis) && StringUtils.equals(key,keyRedis)) {
+                return true;
+            }
+            return false;
 
         }
 

@@ -14,7 +14,16 @@ import java.util.List;
  */
 public interface DataService extends IService<DataEntity> {
 
+    /**
+     * 获取性别表码列表
+     * @return 列表
+     */
     List<DataSearch> getSex();
+
+    /**
+     * 获取注销表码列表
+     * @return 列表
+     */
     List<DataSearch> getZxbs();
 
 }

@@ -1,6 +1,10 @@
+# 管理员秘钥
+administrate:
+  key: newone
 # 密码加密的盐值
 password-util:
   salt: newone
+
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -18,9 +22,10 @@ spring:
     host: 127.0.0.1
     database: 8
     port: 6379
+    timeout: 3600
   session:
     store-type: redis
-    timeout: 14400  #以秒为单位
+    timeout: 3600  #以秒为单位
   aop:
     proxy-target-class: true
   servlet:

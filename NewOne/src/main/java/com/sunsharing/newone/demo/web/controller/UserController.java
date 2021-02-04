@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,10 +40,8 @@ public class UserController extends BaseRestController {
      * @param obj 新增对象
      */
     @PostMapping("/newOne/user/addUser.do")
-    public Id<String> addUser(User user, @RequestBody UserCreate obj, HttpSession session) {
-        session.setAttribute("test", "123456");
-        session.getAttribute("test");
-        return Id.build(userService.addUser(obj, user));
+    public Id<String> addUser(@RequestBody @Valid UserCreate obj, HttpSession session) {
+        return Id.build(userService.addUser(obj,session));
     }
     /**
     * 用户信息表-详情获取
@@ -57,8 +56,8 @@ public class UserController extends BaseRestController {
      * @param obj 修改对象
      */
     @PostMapping("/newOne/user/updateUser.do")
-    public Id<String> updateUser(User user, @RequestBody UserModify obj) {
-        return Id.build(userService.updateUser(obj, user));
+    public Id<String> updateUser(@RequestBody @Valid UserModify obj, HttpSession session) {
+        return Id.build(userService.updateUser(obj, session));
     }
     /**
      * 用户信息表-删除
@@ -66,7 +65,6 @@ public class UserController extends BaseRestController {
      */
     @PostMapping("/newOne/user/deleteUser.do")
     public Result<Boolean> deleteUser(@RequestBody List<String> ids) {
-        log.info(ids.toString());
         return Result.of(userService.deleteUser(ids));
     }
 

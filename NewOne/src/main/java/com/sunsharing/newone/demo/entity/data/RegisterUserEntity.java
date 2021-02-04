@@ -1,20 +1,27 @@
-package com.sunsharing.newone.demo.entity.query.user;
+/*
+ * @(#) RegisterUserEntity
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2021
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author Administrator
+ * <br> 2021-02-03 14:24:02
+ */
+
+package com.sunsharing.newone.demo.entity.data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
 
 /**
- * 用户信息表 创建对象
+ * @author 黄祎翔
+ * @time 2021/2/3 14:24
  */
 @Data
-public class UserCreate {
-
-
+public class RegisterUserEntity {
     /**
      * 用户账号
      */
@@ -30,34 +37,41 @@ public class UserCreate {
     /**
      * 用户手机号
      */
-    @NotBlank
-    @Pattern(regexp="^1[345678]\\d{9}$")
     private String phone;
 
     /**
      * 用户邮箱
      */
-    @NotBlank
     @Email
     private String email;
 
     /**
      * 用户性别（引用表码）
-         * 对应表码名EN_SEX
+     * 对应表码名EN_SEX
      */
-    @NotBlank
     private String sex;
 
     /**
      * 用户所属区（引用区表ID）
-         * 对应表码名EN_DISTRICT
+     * 对应表码名EN_DISTRICT
      */
-    @NotBlank
     private String district;
 
     /**
      * 注销标识，0：未注销、1：注销
-         * 对应表码名EN_ZXBS
+     * 对应表码名EN_ZXBS
      */
     private String zxbs;
+
+    /**
+     * 角色信息，common：普通用户、administrate：管理员
+     */
+    @NotBlank
+    private String role;
+
+    /**
+     * 管理员秘钥
+     */
+    private String key;
+
 }

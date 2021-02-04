@@ -8,6 +8,8 @@ import com.sunsharing.newone.demo.entity.query.user.UserModify;
 import com.sunsharing.share.boot.framework.auth.User;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * 用户信息表 服务类
  *
@@ -16,9 +18,9 @@ import java.util.List;
  */
 public interface UserService extends IService<UserEntity> {
 
-    String addUser(UserCreate obj, User user);
+    String addUser(UserCreate obj, HttpSession session);
 
-    String updateUser(UserModify obj, User user);
+    String updateUser(UserModify obj,HttpSession session);
 
     UserDetail getUser(String id);
 
