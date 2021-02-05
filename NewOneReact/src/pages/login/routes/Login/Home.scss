@@ -1,0 +1,23 @@
+.regBut{
+    //position: absolute;
+    //top:83vh;
+    //left: 69.7vw;
+    //z-index:99999;
+    //width: 300px;
+    //height: 5vh;
+    //font-size: large;
+    position: absolute;
+    font-size: large;
+    bottom: 0px;
+    right: 0;
+    width: 100vw;
+    height: 30px;
+    text-align: center;
+    background:transparent;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.commonRow{
+    display:block;
+}
