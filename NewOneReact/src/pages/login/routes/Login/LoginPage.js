@@ -20,13 +20,48 @@ import {
     createForm
 } from '@share/shareui-form';
 import Network from "@share/network";
-import {TextValidatorUtil} from "@share/common";
-import Dialog from "@/components/Dialog/Dialog";
 import {RegisterRule} from "./Register";
-const getVerifySession = () => {
-    const districtValue =  Network.formGet('/newOne/verifySession.do');
-    return districtValue;
+import {getCookie,setCookie} from "./cookieUtil";
+import Dialog from "@/components/Dialog/Dialog";
+Network.setExceptionHandle((error,abort) => {
+    Spin.hide();
+    Dialog.alert(error.message.split(']')[0].slice(1));
+    abort();//直接中断后续的Promise
+
+});
+/**
+ * @return string 正则获取url中的参数
+ */
+function URL_Request(strName) {
+    var strHref = document.location.toString();
+    var intPos = strHref.indexOf("?");
+    var strRight = strHref.substr(intPos + 1); //==========获取到右边的参数部分
+    var arrTmp = strRight.split("&"); //=============以&分割成数组
+
+    for (var i = 0; i < arrTmp.length; i++) //===========循环数组
+    {
+        var dIntPos = arrTmp[i].indexOf("=");
+        var paraName = arrTmp[i].substr(0, dIntPos);
+        var paraData = arrTmp[i].substr(dIntPos + 1);
+        if (paraName.toUpperCase() === strName.toUpperCase()) {
+            return paraData;
+        }
+    }
+    return "";
+}
+export const transition = async () => {
+    const value = await Network.formGet('/newOne/transition.do');
+    if(value.flag){
+        window.location.replace("/success")
+    }
+
 };
+let outIn = URL_Request("outIn");
+if (outIn){
+    Network.formGet('/newOne/outLogin.do');
+}
+transition();
+
 let districtArray=[];
 // 获取区码数据用于select组件
 const getDistrict = async () => {
@@ -37,6 +72,7 @@ const getDistrict = async () => {
         }
     }
 };
+
 let sexArray=[];
 const getSex = async () => {
     const sexValue = await Network.formGet('/newOne/data/getSex.do');
@@ -58,6 +94,11 @@ const {
 } = getComponents();
 
 const LoginPage = props => {
+    let number = getCookie("VerificationError");
+    let errorNumber = 2;
+    if (number === "true"){
+        errorNumber = 0;
+    }
     let dtpropx={
 
         loginPageProps: {
@@ -80,12 +121,12 @@ const LoginPage = props => {
             // 验证码图片地址
             validateUrl:"/newOne/verify.do",
             //显示记住用户名
-            showRemember:true,
+            showRemember:false,
             //是否使用md5加密
             isMd5Encrypt:true,
             //是否开启输入错误2次自动开启验证码
             verificationCode:true,
-            errorNumber:0
+            errorNumber:errorNumber,
         },
         changePwdProps: {
             // 修改密码校验等级

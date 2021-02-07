@@ -9,6 +9,10 @@ import PublicService from '@/services/PublicService';
 import Network from "@share/network";
 import {transition} from "@/pages/administrate/routes/AddUser/hooks";
 import Dialog from "@/components/Dialog/Dialog";
+Network.setExceptionHandle((error,abort) => {
+    abort();//直接中断后续的Promise
+
+});
 //校验权限
 transition();
 const {
@@ -78,6 +82,10 @@ const View = () => {
         window.open('/newOne/示例表.xlsx');
     }
     async function delUser() {
+        if (obj.check.value.length === 0){
+            await Dialog.alert('请选择删除对象');
+            return ;
+        }
         const flag = await Dialog.confirm("是否确认删除？");
         if (flag) {
             Spin.show('处理数据中，请稍等...');
@@ -91,6 +99,19 @@ const View = () => {
                 }
                 window.location.reload();
             })
+        }
+    }
+    async function outLogin() {
+        const flag = await Dialog.confirm("是否确认注销？");
+        if (flag) {
+            const newVar = await Network.formGet('/newOne/outLogin.do');
+            if (newVar) {
+                await Dialog.alert('注销成功');
+                window.location.href = "/"
+            }else {
+                await Dialog.alert('注销失败');
+                window.location.href = "/"
+            }
         }
     }
     return (<Fragment>
@@ -122,6 +143,7 @@ const View = () => {
                 <Button bsStyle="success" onClick={toAdd}>新增</Button>
                 <Button onClick={delUser}>删除选中项</Button>
                 <Button bsStyle="success" onClick={downExl}>下载excel模板</Button>
+                <Button onClick={outLogin}>注销</Button>
                 <FileUpload
                     request={{
                         url: '/newOne/excel/dataImport.do'
@@ -130,7 +152,10 @@ const View = () => {
                         Spin.hide();
                         // response ==> 后台返回的数据，一般都有包含文件的路径等重要信息
                         // status ==> 上传状态
-                        console.log(response)
+                        if(response.status !== "1200"){
+                            await Dialog.alert(response.message);
+                            return ;
+                        }
                         if (response.data.flag){
                             await Dialog.alert("导入成功");
                         }

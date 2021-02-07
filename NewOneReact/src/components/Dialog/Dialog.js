@@ -40,7 +40,6 @@ export default {
             return new ModalTool({
                 loseBtn: false,
                 bsSize: 'sm',
-                bsStyle: 'warning',
                 backdrop: 'static',
                 closeBtn: false,
                 onOk: () => {

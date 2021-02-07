@@ -1,9 +1,14 @@
 import React from 'react';
-import { Panel, ButtonToolBar, Button } from '@share/shareui';
+import {Panel, ButtonToolBar, Button, Spin} from '@share/shareui';
 import { useForm } from '@share/hooks';
 import { useSave, useToRoute, transition } from './hooks';
 import { getComponents } from '@share/shareui-form';
 import Network from "@share/network";
+import Dialog from "@/components/Dialog/Dialog";
+Network.setExceptionHandle((error,abort) => {
+    abort();//直接中断后续的Promise
+
+});
 //校验权限
 transition();
 const {

@@ -1,10 +1,23 @@
 import React, {useEffect, useState} from 'react';
-import { Panel, ButtonToolBar, Button } from '@share/shareui';
+import {Panel, ButtonToolBar, Button, Spin} from '@share/shareui';
 import { useForm } from '@share/hooks';
 import { useUpdate, useInitData, useToRoute} from './hooks';
 import { getComponents } from '@share/shareui-form';
 import Network from "@share/network";
 import {transition} from "@/pages/administrate/routes/AddUser/hooks";
+import Dialog from "@/components/Dialog/Dialog";
+// import {getCookie,setCookie} from "./cookieUtil";
+
+// const num = getCookie("UpdateTab");
+// if (num === '0' || num === ''){
+//     setCookie("UpdateTab",'1');
+//     location.reload();
+// }else {
+//     setCookie("UpdateTab",'0');
+// }
+Network.setExceptionHandle((error,abort) => {
+    abort();//直接中断后续的Promise
+});
 //校验权限
 transition();
 const {
@@ -36,44 +49,45 @@ const {
 //     getSex();
 //     getDistrict();
 const View = () => {
-    const [sexArray,setSexArray]=useState([]);
-    const [districtArray,setDistrictArray]=useState([]);
-    let sexArrayT=[]
-    let districtArrayT=[]
-    useEffect( () => {
-        const sexValue =  Network.formGet('/newOne/data/getSex.do');
-        const districtValue =  Network.formGet('/newOne/district/list.do');
+    const [sexArray, setSexArray] = useState([]);
+    const [districtArray, setDistrictArray] = useState([]);
+    let sexArrayT = []
+    let districtArrayT = []
+    useEffect(() => {
+        const sexValue = Network.formGet('/newOne/data/getSex.do');
+        const districtValue = Network.formGet('/newOne/district/list.do');
         sexValue.then(value => {
-            for(const i in value){
-                if (sexArray.length<=i){
-                    sexArrayT.push({value:value[i].value,label:value[i].definition})
-                    setSexArray(sexArrayT)
+            for (const i in value) {
+                if (sexArray.length <= i) {
+                    sexArrayT.push({value: value[i].value, label: value[i].definition})
                 }
             }
+            setSexArray(sexArrayT)
         })
+
         districtValue.then(districtValue => {
-            for(const i in districtValue.list){
-                if (districtArray.length <= i){
-                    districtArrayT.push({value:districtValue.list[i].value,label:districtValue.list[i].definition})
-                    setDistrictArray(districtArrayT)
+            for (const i in districtValue.list) {
+                if (districtArray.length <= i) {
+                    districtArrayT.push({value: districtValue.list[i].value, label: districtValue.list[i].definition})
                 }
             }
+            setDistrictArray(districtArrayT)
+
         })
         //处理异步数据
     }, [])
 
-
     const formState = useForm({});
     useInitData({
-        formState
-    });
+                    formState
+                });
 
     const {
         update,
         loading
     } = useUpdate({
-        formState
-    });
+                      formState
+                  });
     const {
         toBack
     } = useToRoute();
@@ -84,13 +98,11 @@ const View = () => {
             <Form formState={formState}>
 
 
-
                 <Row>
 
-                    <Input field="account" label="用户账号" required />
+                    <Input field="account" label="用户账号" required/>
 
                 </Row>
-
 
 
                 {/*<Row>*/}
@@ -100,18 +112,16 @@ const View = () => {
                 {/*</Row>*/}
 
 
-
                 <Row>
 
-                    <Input field="phone" label="用户手机号" required />
+                    <Input field="phone" label="用户手机号" required/>
 
                 </Row>
 
 
-
                 <Row>
 
-                    <Input field="email" label="用户邮箱" required />
+                    <Input field="email" label="用户邮箱" required/>
 
                 </Row>
 
@@ -136,7 +146,6 @@ const View = () => {
                     />
 
                 </Row>
-
 
 
             </Form>
