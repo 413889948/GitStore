@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片转化URL</title>
+    <link rel="stylesheet" href="js/layui-v2.5.6/layui/css/layui.css">
+    <link rel="stylesheet" href="js/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/APITool.css">
+</head>
+<script>
+    //设置页面无滚动条
+    document.documentElement?document.documentElement.style.overflow="hidden":document.body.style.overflow="hidden";
+</script>
+<style>
+    .hyx-bottom{
+        background-color: #EEE;
+        position:relative;
+        height: 44px;
+        width: 100vw;
+        bottom: 0px;
+        text-align:center;
+
+
+    }
+    .hyx-div1{
+        animation:hyx-divmove 6s infinite;
+        z-index: 9;
+
+    }
+    .hyx-div2{
+        animation:hyx-divmove 6s infinite;
+        z-index: 8;
+
+    }
+    .hyx-div3{
+        animation:hyx-divleftmove 6s infinite;
+        -webkit-animation:hyx-divleftmove 6s infinite; /* Safari 和 Chrome */
+        animation-iteration-count:1;
+        -webkit-animation-iteration-count:1;
+        z-index: 9;
+
+    }
+    .hyx-div4{
+        animation:hyx-divmove 6s infinite;
+        z-index: 9;
+
+    }
+    .hyx-div5{
+        animation:hyx-divbottommove 6s infinite;
+        -webkit-animation:hyx-divbottommove 6s infinite; /* Safari 和 Chrome */
+        animation-iteration-count:1;
+        -webkit-animation-iteration-count:1;
+        z-index: 9;
+
+    }
+    .hyx-div6{
+        animation:hyx-divleftmove 6s infinite;
+        -webkit-animation:hyx-divleftmove 6s infinite; /* Safari 和 Chrome */
+        animation-iteration-count:1;
+        -webkit-animation-iteration-count:1;
+        z-index: 10;
+
+
+    }
+    .hyx-div7{
+        animation:hyx-divtopmove 6s infinite;
+        -webkit-animation:hyx-divtopmove 6s infinite; /* Safari 和 Chrome */
+        animation-iteration-count:1;
+        -webkit-animation-iteration-count:1;
+        z-index: 10;
+
+    }
+    .hyx-div8{
+        animation:hyx-divmove 6s infinite;
+        z-index: 8;
+
+    }
+    .hyx-div9{
+        animation:hyx-divmove 6s infinite;
+        z-index: 8;
+
+    }
+    .hyx-div10{
+        animation:hyx-divbottommove 6s infinite;
+        -webkit-animation:hyx-divbottommove 6s infinite; /* Safari 和 Chrome */
+        animation-iteration-count:1;
+        -webkit-animation-iteration-count:1;
+        z-index: 10;
+    }
+    .hyx-div11{
+        animation:hyx-divrightmove 6s infinite;
+        -webkit-animation:hyx-divrightmove 6s infinite; /* Safari 和 Chrome */
+        animation-iteration-count:1;
+        -webkit-animation-iteration-count:1;
+        z-index: 10;
+    }
+    .hyx-div12{
+        animation:hyx-divtopmove 6s infinite;
+        -webkit-animation:hyx-divtopmove 6s infinite; /* Safari 和 Chrome */
+        animation-iteration-count:1;
+        -webkit-animation-iteration-count:1;
+        z-index: 9;
+    }
+    .hyx-div13{
+        animation:hyx-divmove 6s infinite;
+        z-index: 9;
+
+    }
+    .hyx-div14{
+        animation:hyx-divrightmove 6s infinite;
+        -webkit-animation:hyx-divrightmove 6s infinite; /* Safari 和 Chrome */
+        animation-iteration-count:1;
+        -webkit-animation-iteration-count:1;
+        z-index: 8;
+
+    }
+    .hyx-div15{
+        animation:hyx-divmove 6s infinite;
+        z-index: 8;
+
+    }
+    .hyx-div16{
+        animation:hyx-divmove 6s infinite;
+        z-index: 9;
+
+    }
+
+    @keyframes hyx-divtopmove
+    {
+        from {top:0px;}
+        50% {top:-18vh;}
+        to {top:0vh;}
+    }
+    @keyframes hyx-divbottommove
+    {
+        from {bottom:0px;}
+        50% {bottom:-18vh;}
+        to {bottom:0vh;}
+    }
+    @keyframes hyx-divleftmove
+    {
+        from {left:0px;}
+        50% {left:-25%;}
+        to {left:-1px;}
+    }
+    @keyframes hyx-divrightmove
+    {
+        from {right:0px;}
+        50% {right:-25%;}
+        to {right:0px;}
+    }
+    /*x轴弹幕*/
+    @keyframes hyx-bulletX
+    {
+        from {left: -50vw;}
+        to {left: 100vw;}
+    }
+    /*y轴弹幕*/
+    @keyframes hyx-bulletY
+    {
+        from {bottom:-150vh;}
+        to {bottom:200vh;}
+
+    }
+    /*y轴弹幕由上到下*/
+    @keyframes hyx-bulletYup
+    {
+        from {bottom:150vh;}
+        to {bottom:-180vh;}
+
+    }
+    .hyx-divBulletY{
+        animation:hyx-bulletY 8s infinite;
+        -webkit-animation:hyx-bulletY 8s infinite; /* Safari 和 Chrome */
+        color: white;
+        width: 1vw;
+        position:relative;
+        font-size: 1vw;
+
+
+        /*word-wrap:break-word;*/
+    }
+    .hyx-divBulletYup13{
+        animation:hyx-bulletYup 13s infinite;
+        -webkit-animation:hyx-bulletYup 13s infinite; /* Safari 和 Chrome */
+        color: white;
+        width: 1vw;
+        position:relative;
+        font-size: 1vw;
+
+
+        /*word-wrap:break-word;*/
+    }
+    .hyx-divBulletYup20{
+        animation:hyx-bulletYup 20s infinite;
+        -webkit-animation:hyx-bulletYup 20s infinite; /* Safari 和 Chrome */
+        color: white;
+        width: 1vw;
+        position:relative;
+        font-size: 1vw;
+
+
+        /*word-wrap:break-word;*/
+    }
+
+    .hyx-divBulletYup16{
+        animation:hyx-bulletYup 16s infinite;
+        -webkit-animation:hyx-bulletYup 16s infinite; /* Safari 和 Chrome */
+        color: white;
+        width: 1vw;
+        position:relative;
+        font-size: 1vw;
+
+
+        /*word-wrap:break-word;*/
+    }
+
+    .hyx-divBulletX{
+        animation:hyx-bulletX 8s infinite;
+        -webkit-animation:hyx-bulletX 8s infinite; /* Safari 和 Chrome */
+        color: white;
+        position:relative;
+        font-size: 2vw;
+        color:#FFB800;
+        /*word-wrap:break-word;*/
+    }
+
+    .hyx-divBulletY3{
+        animation:hyx-bulletY 3s infinite;
+        -webkit-animation:hyx-bulletY 3s infinite; /* Safari 和 Chrome */
+        color: white;
+        width: 1vw;
+        position:relative;
+        font-size: 1vw;
+
+
+        /*word-wrap:break-word;*/
+    }
+    .hyx-divBulletY4{
+        animation:hyx-bulletY 4s infinite;
+        -webkit-animation:hyx-bulletY 4s infinite; /* Safari 和 Chrome */
+        color: white;
+        width: 1vw;
+        position:relative;
+        font-size: 1vw;
+
+
+        /*word-wrap:break-word;*/
+    }
+    .hyx-divBulletY5{
+        animation:hyx-bulletY 5s infinite;
+        -webkit-animation:hyx-bulletY 5s infinite; /* Safari 和 Chrome */
+        color: white;
+        width: 1vw;
+        position:relative;
+        font-size: 1vw;
+
+
+        /*word-wrap:break-word;*/
+    }
+    .hyx-divBulletY6{
+        animation:hyx-bulletY 6s infinite;
+        -webkit-animation:hyx-bulletY 6s infinite; /* Safari 和 Chrome */
+        color: white;
+        width: 1vw;
+        position:relative;
+        font-size: 1vw;
+
+
+        /*word-wrap:break-word;*/
+    }
+    .hyx-divBulletY7{
+        animation:hyx-bulletY 7s infinite;
+        -webkit-animation:hyx-bulletY 7s infinite; /* Safari 和 Chrome */
+        color: white;
+        width: 1vw;
+        position:relative;
+        font-size: 1vw;
+
+
+        /*word-wrap:break-word;*/
+    }
+    .hyx-divBulletY8{
+        animation:hyx-bulletY 8s infinite;
+        -webkit-animation:hyx-bulletY 8s infinite; /* Safari 和 Chrome */
+        color: white;
+        width: 1vw;
+        position:relative;
+        font-size: 1vw;
+
+
+        /*word-wrap:break-word;*/
+    }
+    .hyx-divBulletY9{
+        animation:hyx-bulletY 9s infinite;
+        -webkit-animation:hyx-bulletY 9s infinite; /* Safari 和 Chrome */
+        color: white;
+        width: 1vw;
+        position:relative;
+        font-size: 1vw;
+
+
+        /*word-wrap:break-word;*/
+    }
+    .hyx-divBulletY10{
+        animation:hyx-bulletY 10s infinite;
+        -webkit-animation:hyx-bulletY 10s infinite; /* Safari 和 Chrome */
+        color: white;
+        width: 1vw;
+        position:relative;
+        font-size: 1vw;
+        /*word-wrap:break-word;*/
+    }
+    .hyx-divBulletY11{
+        animation:hyx-bulletY 11s infinite;
+        -webkit-animation:hyx-bulletY 11s infinite; /* Safari 和 Chrome */
+        color: white;
+        width: 1vw;
+        position:relative;
+        font-size: 1vw;
+        /*word-wrap:break-word;*/
+    }
+    .hyx-divBulletY12{
+        animation:hyx-bulletY 12s infinite;
+        -webkit-animation:hyx-bulletY 12s infinite; /* Safari 和 Chrome */
+        color: white;
+        width: 1vw;
+        position:relative;
+        font-size: 1vw;
+        /*word-wrap:break-word;*/
+    }
+    .hyx-divBulletY13{
+        animation:hyx-bulletY 13s infinite;
+        -webkit-animation:hyx-bulletY 13s infinite; /* Safari 和 Chrome */
+        color: white;
+        width: 1vw;
+        position:relative;
+        font-size: 1vw;
+        /*word-wrap:break-word;*/
+    }
+    .hyx-divBulletY14{
+        animation:hyx-bulletY 14s infinite;
+        -webkit-animation:hyx-bulletY 14s infinite; /* Safari 和 Chrome */
+        color: white;
+        width: 1vw;
+        position:relative;
+        font-size: 1vw;
+        /*word-wrap:break-word;*/
+    }
+    .hyx-divBulletY20{
+        animation:hyx-bulletY 14s infinite;
+        -webkit-animation:hyx-bulletY 14s infinite; /* Safari 和 Chrome */
+        color: white;
+        width: 1vw;
+        position:relative;
+        font-size: 1vw;
+        /*word-wrap:break-word;*/
+    }
+    .hyx-divBulletY18{
+        animation:hyx-bulletY 14s infinite;
+        -webkit-animation:hyx-bulletY 14s infinite; /* Safari 和 Chrome */
+        color: white;
+        width: 1vw;
+        position:relative;
+        font-size: 1vw;
+        /*word-wrap:break-word;*/
+    }
+    /*y轴弹幕由上到下*/
+    @keyframes hyx-Logout
+    {
+        from {bottom:20vh;}
+        50%{bottom: 30vh}
+        to {bottom:20vh;}
+
+    }
+
+    .hyx-divLogout{
+        animation:hyx-Logout 8s infinite;
+        -webkit-animation:hyx-Logout 8s infinite; /* Safari 和 Chrome */
+        color: white;
+        width: 1vw;
+        position:absolute;
+        font-size: 1vw;
+    }
+
+
+    /*设置边框*/
+    /*.hyx-divcss{*/
+
+        /*border: 1.5px solid #00d3e7;*/
+
+        /*border-image: -webkit-linear-gradient(rgb(85, 87, 231), rgb(149, 228, 241)) 20 20;*/
+        /*border-image: -moz-linear-gradient(rgb(85, 87, 231), rgb(149, 228, 241)) 20 20;*/
+        /*border-image: -o-linear-gradient(rgb(85, 87, 231), rgb(149, 228, 241)) 20 20;*/
+        /*border-image: linear-gradient(rgb(85, 87, 231), rgb(149, 228, 241)) 20 20;*/
+    /*}*/
+</style>
+<body>
+<div style="background-color: black;height: 95.3vh" class="layui-row layui-col-space10">
+
+    <div  class=" layui-col-xs2"style="height: 73vh">
+        <div class="hyx-divBulletY6"style="left:4vw;font-size: 1.5vw;z-index: 999;">我还是<span style="font-size: 2vw;">白色</span></div>
+        <div class="hyx-divBulletY12"style="left:1vw;font-size: 1.5vw;z-index: 999;color: #FFB800"><span style="color: #FF5722;font-size: 2vw;">通宵</span>可以建立稳固的同事友谊</div>
+        <div class="hyx-divBulletY18"style="left:7vw;font-size: 1.5vw;z-index: 999;">前<span style="font-size: 2vw;color: #5FB878">电脑</span>后<span style="font-size: 2vw;color: #1E9FFF">甲方</span>旁边还放着<span style="font-size: 2vw;color: #FFB800">郭德纲</span></div>
+        <div class="hyx-divBulletY10"style="left:12vw;font-size: 1.5vw;z-index: 999;font-size: 2vw;"><span style="color: #FF5722">五</span><span style="color: #FFB800">彩</span><span style="color: #1E9FFF">斑</span><span style="color: #009688">斓</span><span style="color: #393D49">的黑</span></div>
+    </div>
+    <div  class=" layui-col-xs8"style="height: 73vh">
+
+
+        <div id="hyx-div1" class=" layui-col-xs3 "style="background-color: black;height: 18vh;font-size:2vw;text-align:center;"><span style="position:relative;top: 34%;display:none;color: #FFFFFF">1</span></div>
+        <div id="hyx-div2" class=" layui-col-xs3 "style="background-color: black;height: 18vh;font-size:1vw;text-align:center;"><span style="position:relative;top: 34%;display:none;color: #FFFFFF">你还来真的啊</span></div>
+        <div id="hyx-div3" class=" layui-col-xs3 "style="background-color: black;height: 18vh;font-size:1.5vw;text-align:center;"><span style="position:relative;top: 34%;display:none;color: #FFFFFF"onclick="login()">啊玩来过爷大</span></div>
+        <div id="hyx-div4" class=" layui-col-xs3 "style="background-color: black;height: 18vh;font-size:2vw;text-align:center;"><span style="position:relative;top: 34%;display:none;color: #FFFFFF">4</span></div>
+        <div id="hyx-div5" class=" layui-col-xs3 "style="background-color: black;height: 18vh;font-size:1.5vw;text-align:center;"><span style="position:relative;top: 34%;display:none;color: #FFFFFF">大爷过来玩啊</span></div>
+        <div id="hyx-div6" class=" layui-col-xs3  hyx-divcss"style="background-color: black;height:18vh;font-size:2vw;text-align:center;"><span style="position:relative;top: 34%;color: #FFFFFF">欢迎来到</span></div>
+        <div id="hyx-div7" class=" layui-col-xs3  hyx-divcss"style="background-color: black;height:18vh;font-size:2vw;text-align:center;"><span style="position:relative;top: 34%;color: #FFFFFF">新人考核项目</span></div>
+        <div id="hyx-div8" class=" layui-col-xs3 "style="background-color: black;height: 18vh;font-size:1vw;text-align:center;"><span style="position:relative;top: 34%;display:none;color: #FFFFFF">验证知识的掌握程度开发的项目</span></div>
+        <div class="hyx-divBulletX"style="z-index: 999;">代码没写完哪有脸睡觉</div>
+        <div id="hyx-div9" class=" layui-col-xs3  "style="background-color: black;height: 18vh;font-size:1vw;text-align:center;"><span style="position:relative;top: 34%;display:none;color: #FFFFFF">天天就知道玩</span></div>
+        <div id="hyx-div10" class=" layui-col-xs3  hyx-divcss"style="background-color: black;height:18vh;font-size:2vw;text-align:center;"><span style="position:relative;top: 34%;color: #FFFFFF">这是？</span></div>
+        <div id="hyx-div11" class=" layui-col-xs3  hyx-divcss"style="background-color: black;height:18vh;font-size:2vw;text-align:center;"><span style="position:relative;top: 34%;color: #FFFFFF">什么？</span></div>
+        <div id="hyx-div12" class=" layui-col-xs3 "style="background-color: black;height: 18vh;font-size:1.5vw;text-align:center;"><span style="position:relative;top: 34%;display:none;color: #FFFFFF">大爷过来玩啊</span></div>
+        <div id="hyx-div13" class=" layui-col-xs3 "style="background-color: black;height: 18vh;font-size:2vw;text-align:center;"><span style="position:relative;top: 34%;display:none;color: #FFFFFF">13</span></div>
+        <div id="hyx-div14" class=" layui-col-xs3 "style="background-color: black;height: 18vh;font-size:1.5vw;text-align:center;"><span style="position:relative;top: 34%;display:none;color: #FFFFFF">大爷过来玩啊</span></div>
+        <div id="hyx-div15" class=" layui-col-xs3 "style="background-color: black;height: 18vh;font-size:1vw;text-align:center;"><span style="position:relative;top: 34%;display:none;color: #FFFFFF">欢迎提供意见</span></div>
+        <div id="hyx-div16" class=" layui-col-xs3 "style="background-color: black;height: 18vh;font-size:2vw;text-align:center;"><span style="position:relative;top: 34%;display:none;color: #FFFFFF">16</span></div>
+
+
+    </div>
+    <div id="loginDiv"  class=" layui-col-xs2"style="height: 73vh">
+        <div class="hyx-divBulletYup13"style="right:10vw;font-size: 1.5vw;z-index: 999;">其实是可以<span style="color: #FF5722;font-size: 2vw;" onclick="login()">登录</span>的，你能找到么</div>
+        <div class="hyx-divBulletYup20"style="right:6vw;font-size: 1.5vw;z-index: 999;">不<span style="color: #FFB800;font-size: 2vw;">会</span>吧不<span style="color: #FFB800;font-size: 2vw;">会</span>吧不<span style="color: #FFB800;font-size: 2vw;">会</span>吧</div>
+        <div class="hyx-divBulletY18"style="right:1vw;font-size: 1.5vw;z-index: 999;">不<span style="color: #FFB800;font-size: 2vw;">会</span>真的有人连<span style="color: #FF5722;font-size: 2vw;"onclick="login()">登录</span>都不<span style="color: #FFB800;font-size: 2vw;">会</span>吧</div>
+
+</div>
+<div class="hyx-bottom layui-bg-black" style="z-index: 1999;">
+    <span style="position:relative;top: 14px;">欢迎使用新人考核项目</span>
+</div>
+
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/jquery_cookie_1.41/jquery.cookie.js"></script>
+<script src="js/layui-v2.5.6/layui/layui.all.js"></script>
+<script src="js/layer/layer.js"></script>
+<script src="./js/echarts.min.js"></script>
+<script type="text/javascript" src="js/clipboard.js-master/dist/clipboard.min.js"></script>
+<!--逻辑方法-->
+<script>
+
+var indexLogin;
+
+    function login() {
+        layer.confirm('是否跳转登录页面？',{title:'被发现了~。~'}, function(index){
+
+            indexLogin=layer.open({
+                    type: 2,
+                    title: "登录页面",
+                    area: ['480px', '230px'],
+                    offset: '20px',
+                    content: 'login.html',
+                    cancel: function(index) {
+                        layer.close(index);
+                    },
+                    success: function(index) {
+                        window.location.replace("http://localhost:4000?outIn=true");
+                        layer.close(index);
+                    }
+                })
+            layer.close(index);
+        });
+
+    }
+</script>
+<script>
+
+    //设置模块有鼠标悬停时，向对应方向拓展（就是添加指定的class，且只运行一次）
+    $("#hyx-div10").one('mouseover',function () {
+        //添加对应class格式
+        $("#hyx-div10").addClass("hyx-div10");
+        //让本身模块的文字渐消失
+        $("#hyx-div10 span").fadeOut(1000);
+        //在模块移动到指定位置（3秒后）渐渐显示模块上的文字
+        setTimeout(function () {
+            $("#hyx-div10 span").fadeIn(1000);
+            $("#hyx-div14 span").fadeIn(1000);
+            $("#hyx-div14").addClass("hyx-divcss ");
+            $("#hyx-div14").one('mouseover',function () {
+                $("#hyx-div14").addClass("hyx-div14");
+                $("#hyx-div14 span").fadeOut(1000);
+                setTimeout(function () {
+                    $("#hyx-div14 span").fadeIn(1000);
+                    $("#hyx-div15 span").fadeIn(1000);
+                    $("#hyx-div15").addClass("hyx-divcss ");
+                },3000);
+            })
+        },3000)
+    })
+    $("#hyx-div11").one('mouseover',function () {
+        $("#hyx-div11").addClass("hyx-div11");
+        $("#hyx-div11 span").fadeOut(1000);
+        setTimeout(function () {
+            $("#hyx-div11 span").fadeIn(1000);
+            $("#hyx-div12 span").fadeIn(1000);
+            $("#hyx-div12").addClass("hyx-divcss ");
+            $("#hyx-div12").one('mouseover',function () {
+                $("#hyx-div12").addClass("hyx-div12");
+                $("#hyx-div12 span").fadeOut(1000);
+                setTimeout(function () {
+                    $("#hyx-div12 span").fadeIn(1000);
+                    $("#hyx-div8 span").fadeIn(1000);
+                    $("#hyx-div8").addClass("hyx-divcss ");
+                },3000);
+            })
+
+        },3000)
+    })
+    $("#hyx-div6").one('mouseover',function () {
+        $("#hyx-div6").addClass("hyx-div6");
+        $("#hyx-div6 span").fadeOut(1000);
+        setTimeout(function () {
+            $("#hyx-div6 span").fadeIn(1000);
+            $("#hyx-div5 span").fadeIn(1000);
+            $("#hyx-div5").addClass("hyx-divcss ");
+            $("#hyx-div5").one('mouseover',function () {
+                $("#hyx-div5").addClass("hyx-div5");
+                $("#hyx-div5 span").fadeOut(1000);
+                setTimeout(function () {
+                    $("#hyx-div5 span").fadeIn(1000);
+                    $("#hyx-div9 span").fadeIn(1000);
+                    $("#hyx-div9").addClass("hyx-divcss ");
+                },3000);
+            })
+
+
+        },3000)
+    })
+    $("#hyx-div7").one('mouseover',function () {
+        $("#hyx-div7").addClass("hyx-div7");
+        $("#hyx-div7 span").fadeOut(1000);
+        setTimeout(function () {
+            $("#hyx-div7 span").fadeIn(1000);
+            $("#hyx-div3 span").fadeIn(1000);
+            $("#hyx-div3").addClass("hyx-divcss ");
+            $("#hyx-div3").one('mouseover',function () {
+                $("#hyx-div3").addClass("hyx-div3");
+                $("#hyx-div3 span").fadeOut(1000);
+                setTimeout(function () {
+                    $("#hyx-div3 span").fadeIn(1000);
+                    $("#hyx-div2 span").fadeIn(1000);
+                    $("#hyx-div2").addClass("hyx-divcss ");
+                },3000);
+            })
+
+        },3000)
+    })
+
+    //当前网址的端口与地址
+    var nowUrl=window.location.host;
+    layui.use(['upload','element'], function(){
+        var upload = layui.upload;
+        var element = layui.element;
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#ImgUpload' //绑定元素
+            ,url: '/upload' //上传接口
+            ,size:3144
+            ,done: function(res){
+                if (res.flag) {
+                    layer.open({
+                        content: '上传成功！'
+                        , btn: ['复制', '取消']
+                        , yes: function (index, layero) {
+                            //按钮【按钮一】的回调
+                            //进行复制
+                            layer.prompt({
+                                formType: 2,
+                                id:"remarksPrompt",
+                                value: nowUrl+'/img/'+res.message,
+                                title: '请复制链接',
+                                area: ['500px', '25px'],
+                                closeBtn: 0,
+                                success:function (layero,index) {
+                                    $("#remarksPrompt textarea").attr("readOnly","readOnly");
+                                    $("#remarksPrompt textarea").select();
+                                },
+                                btn:["取消"]
+                            }, function(value, index, elem){
+                                element.progress('demo', '0%');
+                                layer.close(index);
+                            });
+                            layer.close(index);
+
+
+                        }
+                        , btn2: function (index, layero) {
+                            //按钮【按钮二】的回调
+                            layer.alert('链接为:'+nowUrl+'/img/'+res.message);
+                            //将进度条置空
+                            element.progress('demo', '0%');
+                            //return false 开启该代码可禁止点击该按钮关闭
+                        }
+                        , closeBtn: 0
+                    });
+                }else {
+                    layer.msg("上传失败，请重试");
+                }
+            },progress: function(n, elem){
+                var percent = n + '%' //获取进度百分比
+                element.progress('demo', percent); //可配合 layui 进度条元素使用
+
+                //以下系 layui 2.5.6 新增
+                console.log(elem); //得到当前触发的元素 DOM 对象。可通过该元素定义的属性值匹配到对应的进度条。
+            }
+            ,error: function(){
+                layer.msg("服务器失效，请联系管理员");
+                //请求异常回调
+            }
+        });
+    });
+
+</script>
+<!--页面调用方法-->
+<script>
+
+    function goAPITool() {
+        window.parent.location.href='APITool.html';
+
+    }
+
+    $("#idea").click(function () {
+        layer.prompt({
+            formType: 2,
+            value: '',
+            title: '欢迎提供建议',
+        }, function(value, index, elem){
+            alert(value); //得到value
+            layer.close(index);
+        });
+    })
+
+</script>
+
+
+</body>
+</html>

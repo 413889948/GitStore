@@ -1,0 +1,21 @@
+.searchBox {
+  height: 100%;
+  .btns {
+    :global {
+      .mshare-flexbox-item {
+        margin-left: 0;
+      }
+
+      .mshare-button {
+        border-radius: 0;
+        &:before {
+          border-radius: 0;
+        }
+      }
+    }
+  }
+}
+.forms {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}

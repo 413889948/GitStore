@@ -1,0 +1,109 @@
+# 管理员秘钥
+administrate:
+  key: newone
+# 密码加密的盐值
+password-util:
+  salt: newone
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #数据源链接
+    url: jdbc:mysql://rm-wz9ov0f403gi9b9shro.mysql.rds.aliyuncs.com:3306/newone?useUnicode=true&serverTimezone=GMT%2B8&characterEncoding=utf-8
+    #数据库用户名
+    username: hyx
+    #数据库密码
+    password: h8986345@
+    druid:
+      #数据源最大链接数
+      max-active: 10
+  redis:
+    host: 127.0.0.1
+    database: 8
+    port: 6379
+  session:
+    store-type: redis
+    timeout: 3600  #以秒为单位
+  aop:
+    proxy-target-class: true
+  servlet:
+    multipart:
+      #单文件大小
+      max-file-size:  100MB
+      #一次请求文件的大小
+      max-request-size: 100MB
+  mvc:
+    pathmatch:
+      # 就这个来做后缀匹配，springboot2.x
+      use-suffix-pattern: true
+server:
+  tomcat:
+    max-swallow-size: 110MB
+  #启动的web服务端口号
+  port: 8080
+  #servlet:
+  #  context-path: /test
+share:
+  #规范配置，应用id，实施测试不要修改
+  app-id: share
+  #规范配置，模块id，实施测试不要修改
+  module-id: java-coding-standard
+  mapping:
+    enabled: false
+    public-module: /actuator,/public,/code,/api/,/rpc,/error,${management.context-path:}
+  security-login:
+    enabled: false
+    password-encrypt: none
+  code:
+    # 没有做JDBC加载的表码，忽略dataLoader
+    ignore-data-loader: false
+    init-table: t_ec_newone_tablemanage
+    redis-cache:
+      enable: false
+      name-space: ${share.app-id}-${share.module-id}
+      database: 13
+#    enums:
+#      save-cache: false
+#      # 枚举对象扫描路径。
+#      scan-package: com.sunsharing.newone.demo.constant.enums
+
+  file:
+    fileServerType: base
+    fileCenterServerPath: http://localhost:8888
+    fileCenterFrontPath: /
+    storage:
+      type: JFS
+      jfsPath: /home/files
+      #DFS存储时用的，使用了JFS，此节点可以不配置
+    #      dfs:
+    #        serverIp: 192.168.0.235
+    #        serverProxyIp: 192.168.0.235
+    #        port: 1314
+    #        localIp: 192.168.1.150
+    manager:
+      #存储信息管理，none、encrypt、table
+      type: encrypt
+    adapter:
+      support-relative-name: true
+      enable-common-fs: true
+      enable-scurd: true
+    cloud:
+      discovery:
+        enable: true
+        default-server: http://127.0.0.1:8080
+        server:
+          weixin: https://api.weixin.qq.com
+      #服务实例上下文
+      service-context-path:
+        #启用自动添加上下文,默认值为true
+        enable: true
+        #服务实例的上下文对应配置
+#          mapping:
+#            share-cloud-test: /test
+mybatis-plus:
+  configuration:
+    mapUnderscoreToCamelCase: true
+  mapper-locations: classpath*:mapper/**/**.xml
+  type-enums-package: com.sunsharing.newone.demo.constant.enums
+debug: false

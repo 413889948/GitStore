@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .hyx-div10{
+        animation:hyx-divbottommove 6s infinite;
+        -webkit-animation:hyx-divbottommove 6s infinite; /* Safari 和 Chrome */
+        z-index: 10;
+        position:relative;
+
+    }
+    @keyframes hyx-divbottommove
+    {
+        from {bottom:0px;}
+        50% {bottom:-18vh;}
+        to {bottom:0vh;}
+    }
+    /*div*/
+    /*{*/
+        /*width:100px;*/
+        /*height:100px;*/
+        /*background:red;*/
+        /*position:relative;*/
+        /*animation:mymove 5s infinite;*/
+        /*-moz-animation:mymove 5s infinite; !* Firefox *!*/
+        /*-webkit-animation:mymove 5s infinite; !* Safari and Chrome *!*/
+        /*-o-animation:mymove 5s infinite; !* Opera *!*/
+    /*}*/
+
+    @keyframes mymove
+    {
+        from {top:0px;}
+        to {top:200px;}
+    }
+
+    @-moz-keyframes mymove /* Firefox */
+    {
+        from {top:0px;}
+        to {top:200px;}
+    }
+
+    @-webkit-keyframes mymove /* Safari and Chrome */
+    {
+        from {top:0px;}
+        to {top:200px;}
+    }
+
+    @-o-keyframes mymove /* Opera */
+    {
+        from {top:0px;}
+        to {top:200px;}
+    }
+</style>
+<body>
+<div id="1" class="hyx-div10" >1111111111111111111111</div>
+
+</body>
+</html>
