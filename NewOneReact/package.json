@@ -36,6 +36,7 @@
     "classnames": "^2.2.5",
     "core-js": "^2.6.5",
     "dva": "^2.6.0-beta.20",
+    "immer": "^8.0.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-router": "^5.1.2",

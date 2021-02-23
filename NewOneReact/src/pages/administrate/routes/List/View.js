@@ -1,15 +1,17 @@
-import React, {Fragment, useState,useEffect} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import {Panel, FileUpload, Button, Spin} from '@share/shareui';
-import { useListPage } from '@share/hooks';
-import { getComponents } from '@share/shareui-form';
-import { ShareList, Column, ActionColumn, NumberColumn,CheckColumn } from '@share/list';
-import { useRemove, useToRoute } from './hooks';
-import { useService } from '@share/framework';
+import {useListPage} from '@share/hooks';
+import {getComponents} from '@share/shareui-form';
+import {ShareList, Column, ActionColumn, NumberColumn, CheckColumn} from '@share/list';
+import {useRemove, useToRoute} from './hooks';
+import {useService} from '@share/framework';
 import PublicService from '@/services/PublicService';
 import Network from "@share/network";
 import {transition} from "@/pages/administrate/routes/AddUser/hooks";
 import Dialog from "@/components/Dialog/Dialog";
-Network.setExceptionHandle((error,abort) => {
+import produce from 'immer';
+
+Network.setExceptionHandle((error, abort) => {
     abort();//直接中断后续的Promise
 
 });
@@ -20,23 +22,23 @@ const {
     Select,
     Form
 } = getComponents('search');
-let sexArray=[];
+let sexArray = [];
 const getSex = async () => {
     const sexValue = await Network.formGet('/newOne/data/getSex.do');
 
-    for(const i in sexValue){
-        if (sexArray.length<=i){
-            sexArray.push({value:sexValue[i].value,label:sexValue[i].definition})
+    for (const i in sexValue) {
+        if (sexArray.length <= i) {
+            sexArray.push({value: sexValue[i].value, label: sexValue[i].definition})
         }
     }
 };
-let districtArray=[];
+let districtArray = [];
 // 获取区码数据用于select组件
 const getDistrict = async () => {
     const districtValue = await Network.formGet('/newOne/district/list.do');
-    for(const i in districtValue.list){
-        if (districtArray.length <= i){
-            districtArray.push({value:districtValue.list[i].value,label:districtValue.list[i].definition})
+    for (const i in districtValue.list) {
+        if (districtArray.length <= i) {
+            districtArray.push({value: districtValue.list[i].value, label: districtValue.list[i].definition})
         }
     }
 };
@@ -44,9 +46,9 @@ window.onload = function () {
     getSex();
     getDistrict();
 }
-const minutes=1000*60;
-const hours=minutes*60;
-const days=hours*24;
+const minutes = 1000 * 60;
+const hours = minutes * 60;
+const days = hours * 24;
 const View = () => {
     const service = useService(PublicService);
     const {
@@ -54,21 +56,29 @@ const View = () => {
         formState,
         search
     } = useListPage({
-        initData: {},
-        uniqKey: 'uuid',
-        searchService: service.list
-    });
-    let obj = JSON.parse(JSON.stringify(listState));
-    let nowDate = new Date();
-    nowDate = nowDate.getTime() - days*14;
-    for (const i in obj.list){
-        const oldDate = new Date(obj.list[i].loginTime);
-        if (oldDate < nowDate){
-            obj.list[i]['loginTime']=obj.list[i]['loginTime']+"【不活跃】";
-        }else {
-            obj.list[i]['loginTime']=obj.list[i]['loginTime']+"【活跃】";
+                        initData: {},
+                        uniqKey: 'uuid',
+                        searchService: service.list
+                    });
+
+
+    // let obj={...listState};
+    let obj = produce(listState, obj => {
+        if (obj.list.length != 0) {
+            let nowDate = new Date();
+            nowDate = nowDate.getTime() - days * 14;
+            for (const i in obj.list) {
+                const oldDate = new Date(obj.list[i].loginTime);
+                if (oldDate < nowDate) {
+                    obj.list[i]['loginTime'] = obj.list[i]['loginTime'] + "【不活跃】";
+                } else {
+                    obj.list[i]['loginTime'] = obj.list[i]['loginTime'] + "【活跃】";
+                }
+            }
         }
-    }
+    })
+
+
     const {
         toEdit,
         toAdd
@@ -76,15 +86,17 @@ const View = () => {
     const {
         remove
     } = useRemove({
-        refresh: listState.refresh
-    });
+                      refresh: obj.refresh
+                  });
+
     async function downExl() {
         window.open('/newOne/示例表.xlsx');
     }
+
     async function delUser() {
-        if (obj.check.value.length === 0){
+        if (obj.check.value.length === 0) {
             await Dialog.alert('请选择删除对象');
-            return ;
+            return;
         }
         const flag = await Dialog.confirm("是否确认删除？");
         if (flag) {
@@ -92,15 +104,16 @@ const View = () => {
             const newVar = Network.json('/newOne/user/deleteUser.do', obj.check.value);
             newVar.then(async value => {
                 Spin.hide();
-                if(value.result){
+                if (value.result) {
                     await Dialog.alert('删除成功');
-                }else {
+                } else {
                     await Dialog.alert('删除失败');
                 }
                 window.location.reload();
             })
         }
     }
+
     async function outLogin() {
         const flag = await Dialog.confirm("是否确认注销？");
         if (flag) {
@@ -108,24 +121,22 @@ const View = () => {
             if (newVar) {
                 await Dialog.alert('注销成功');
                 window.location.href = "/"
-            }else {
+            } else {
                 await Dialog.alert('注销失败');
                 window.location.href = "/"
             }
         }
     }
+
     return (<Fragment>
         <Panel>
             <Form grid={5} formState={formState} query={search} resetRetry>
 
 
-
-                <Input field="account" label="用户账号" />
-
+                <Input field="account" label="用户账号"/>
 
 
-                <Input field="phone" label="用户手机号" />
-
+                <Input field="phone" label="用户手机号"/>
 
 
                 <Select
@@ -152,11 +163,11 @@ const View = () => {
                         Spin.hide();
                         // response ==> 后台返回的数据，一般都有包含文件的路径等重要信息
                         // status ==> 上传状态
-                        if(response.status !== "1200"){
+                        if (response.status !== "1200") {
                             await Dialog.alert(response.message);
-                            return ;
+                            return;
                         }
-                        if (response.data.flag){
+                        if (response.data.flag) {
                             await Dialog.alert("导入成功");
                         }
                         window.location.reload();
@@ -176,27 +187,27 @@ const View = () => {
 
         </Panel>
         <Panel>
-            <ShareList listState={listState}>
-                <NumberColumn />
+            <ShareList listState={obj}>
+                <NumberColumn/>
                 {/* 内置的选中列 */}
-                <CheckColumn />
+                <CheckColumn/>
 
-                <Column field="account" label="用户账号" />
+                <Column field="account" label="用户账号"/>
 
-                <Column field="phone" label="用户手机号" />
+                <Column field="phone" label="用户手机号"/>
 
-                <Column field="email" label="用户邮箱" />
+                <Column field="email" label="用户邮箱"/>
 
-                <Column field="_cn_sex" label="用户性别" />
+                <Column field="_cn_sex" label="用户性别"/>
 
-                <Column field="_cn_district" label="用户所属区" />
+                <Column field="_cn_district" label="用户所属区"/>
 
-                <Column field="loginTime" label="最后登录时间【活跃度】" />
+                <Column field="loginTime" label="最后登录时间【活跃度】"/>
 
 
                 <ActionColumn width={100}>
-                    <ActionColumn.Edit onClick={toEdit} />
-                    <ActionColumn.Remove onClick={remove} />
+                    <ActionColumn.Edit onClick={toEdit}/>
+                    <ActionColumn.Remove onClick={remove}/>
                 </ActionColumn>
             </ShareList>
         </Panel>
