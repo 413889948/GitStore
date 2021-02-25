@@ -65,102 +65,84 @@ public class ExcelServiceImpl implements ExcelService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public FlagEntity importData(HttpSession session, MultipartFile file)  {
+    public FlagEntity importData(HttpSession session, MultipartFile file) {
 
         if (file == null) {
             throw new ShareBusinessException(MyResponseCode.FILE_WRONG);
         }
-        XSSFWorkbook workbook;
-        InputStream inputStream = null;
-        try {
-            inputStream = file.getInputStream();
-            workbook = new XSSFWorkbook(inputStream);
-        } catch (IOException e) {
-            log.error("导入文件格式出错",e);
-            throw new ShareBusinessException(MyResponseCode.FILE_WRONG);
-        } finally {
-            try {
-                if (inputStream != null) {
-                    inputStream.close();
+        try (InputStream inputStream = file.getInputStream(); XSSFWorkbook workbook = new XSSFWorkbook(inputStream)) {
+            //读取第一个sheet
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            // 获取用户session数据
+            String accountAdmin = (String) session.getAttribute("NEWONE_USER_ACCOUNT");
+            AdministrateEntity ae = administrateMapper.selectOne(new QueryWrapper<AdministrateEntity>().eq("ACCOUNT", accountAdmin));
+            List<UserEntity> userEntities = new ArrayList<>();
+            Set<String> acStrings = new HashSet<>();
+            //从第1行读取到最后一行
+            for (int rowIndex = 2; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
+                // XSSFRow 代表一行数据
+                XSSFRow row = sheet.getRow(rowIndex);
+                //获取单元格,设置单元格类型
+                XSSFCell account = row.getCell(0);
+                account.setCellType(CellType.STRING);
+                XSSFCell password = row.getCell(1);
+                password.setCellType(CellType.STRING);
+                XSSFCell phone = row.getCell(2);
+                phone.setCellType(CellType.STRING);
+                XSSFCell email = row.getCell(3);
+                email.setCellType(CellType.STRING);
+                XSSFCell sex = row.getCell(4);
+                sex.setCellType(CellType.STRING);
+                XSSFCell district = row.getCell(5);
+                district.setCellType(CellType.STRING);
+                //获取单元格数据
+                String accountValue = account.getStringCellValue();
+                String passwordValue = password.getStringCellValue();
+                String phoneValue = phone.getStringCellValue();
+                String emailValue = email.getStringCellValue();
+                String sexValue = sex.getStringCellValue();
+                String districtValue = district.getStringCellValue();
+                if (StringUtil.isAllBlank(accountValue, passwordValue, phoneValue, emailValue, sexValue, districtValue)) {
+                    continue;
                 }
-            } catch (IOException e) {
-                log.error("清理文件流出错",e);
-                throw new ShareBusinessException(MyResponseCode.FILE_WRONG);
+                //非空校验
+                if (!StringUtils.isNoneBlank(accountValue, passwordValue, phoneValue, emailValue, sexValue, districtValue)) {
+                    throw new ShareBusinessException(ShareResponseCode.VALID_FIELD_NOT_EMPTY);
+                }
+                // 检测用户属性是否符合规范
+                if (!TextValidator.isMobileExact(phoneValue)
+                    || !TextValidator.isEmail(emailValue)
+                    || !Pattern.matches("^(?![0-9]+$)(?![a-zA-Z]+$)[0-9a-zA-Z]{8,20}$", passwordValue)) {
+                    throw new ShareBusinessException(ShareResponseCode.VALID_FIELD_ILLEGAL);
+                }
+                UserEntity userEntity = userService.getOne(new QueryWrapper<UserEntity>()
+                    .eq("ACCOUNT", accountValue));
+                if (userEntity != null) {
+                    throw new ShareBusinessException(MyResponseCode.NAME_REPETITION);
+                }
+                String uuid = IdGenerator.uuid2();
+                UserEntity entity =
+                    new UserEntity(uuid,
+                        accountValue,
+                        PasswordUtil.saltEncryptionUtil(EncodeUtil.md5(passwordValue)),
+                        phoneValue,
+                        emailValue,
+                        ae.getUuid(),
+                        ae.getUuid(),
+                        sexValue,
+                        districtValue);
+                if (acStrings.contains(entity.getAccount())) {
+                    throw new ShareBusinessException(MyResponseCode.REPEAT_WRONG);
+                }
+                acStrings.add(entity.getAccount());
+                userEntities.add(entity);
             }
-        }
-        //读取第一个sheet
-        XSSFSheet sheet = workbook.getSheetAt(0);
-        // 获取用户session数据
-        String accountAdmin = (String) session.getAttribute("NEWONE_USER_ACCOUNT");
-        AdministrateEntity ae = administrateMapper.selectOne(new QueryWrapper<AdministrateEntity>().eq("ACCOUNT", accountAdmin));
-        List<UserEntity> userEntities = new ArrayList<>();
-        Set<String> acStrings = new HashSet<>();
-        //从第1行读取到最后一行
-        for (int rowIndex = 2; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
-            // XSSFRow 代表一行数据
-            XSSFRow row = sheet.getRow(rowIndex);
-            //获取单元格,设置单元格类型
-            XSSFCell account = row.getCell(0);
-            account.setCellType(CellType.STRING);
-            XSSFCell password = row.getCell(1);
-            password.setCellType(CellType.STRING);
-            XSSFCell phone = row.getCell(2);
-            phone.setCellType(CellType.STRING);
-            XSSFCell email = row.getCell(3);
-            email.setCellType(CellType.STRING);
-            XSSFCell sex = row.getCell(4);
-            sex.setCellType(CellType.STRING);
-            XSSFCell district = row.getCell(5);
-            district.setCellType(CellType.STRING);
-            //获取单元格数据
-            String accountValue = account.getStringCellValue();
-            String passwordValue = password.getStringCellValue();
-            String phoneValue = phone.getStringCellValue();
-            String emailValue = email.getStringCellValue();
-            String sexValue = sex.getStringCellValue();
-            String districtValue = district.getStringCellValue();
-            if (StringUtil.isAllBlank(accountValue,passwordValue,phoneValue,emailValue,sexValue,districtValue)) {
-                continue;
-            }
-            //非空校验
-            if (!StringUtils.isNoneBlank(accountValue,passwordValue,phoneValue,emailValue,sexValue,districtValue)) {
-                throw new ShareBusinessException(ShareResponseCode.VALID_FIELD_NOT_EMPTY);
-            }
-            // 检测用户属性是否符合规范
-            if (!TextValidator.isMobileExact(phoneValue)
-                || !TextValidator.isEmail(emailValue)
-                || !Pattern.matches("^(?![0-9]+$)(?![a-zA-Z]+$)[0-9a-zA-Z]{8,20}$", passwordValue)) {
-                throw new ShareBusinessException(ShareResponseCode.VALID_FIELD_ILLEGAL);
-            }
-            UserEntity userEntity = userService.getOne(new QueryWrapper<UserEntity>()
-                .eq("ACCOUNT",accountValue));
-            if (userEntity != null) {
-                throw new ShareBusinessException(MyResponseCode.NAME_REPETITION);
-            }
-            String uuid = IdGenerator.uuid2();
-            UserEntity entity =
-                new UserEntity(uuid,
-                accountValue,
-                PasswordUtil.saltEncryptionUtil(EncodeUtil.md5(passwordValue)),
-                phoneValue,
-                emailValue,
-                ae.getUuid(),
-                ae.getUuid(),
-                sexValue,
-                districtValue);
-            if (acStrings.contains(entity.getAccount())) {
-                throw new ShareBusinessException(MyResponseCode.REPEAT_WRONG);
-            }
-            acStrings.add(entity.getAccount());
-            userEntities.add(entity);
-        }
-        // 将打开的 XSSFWorkbook 关闭
-        try {
-            workbook.close();
+
+            return new FlagEntity(userService.addUserList(userEntities));
+
         } catch (IOException e) {
-            log.error("清理XSSFWorkbook出错",e);
+            log.error("导入文件格式出错", e);
             throw new ShareBusinessException(MyResponseCode.FILE_WRONG);
         }
-        return new FlagEntity(userService.addUserList(userEntities));
     }
 }
