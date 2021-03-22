@@ -20,7 +20,7 @@ createApplication({
             path: '/',
             title: '登录',
             component: () => import('@/pages/login/routes/Login')
-        },
+        }
 
     ]
 });

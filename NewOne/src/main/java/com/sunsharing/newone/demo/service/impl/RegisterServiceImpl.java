@@ -53,7 +53,7 @@ public class RegisterServiceImpl extends ServiceImpl<UserMapper, UserEntity> imp
     private String key;
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public String registerUser(RegisterUserEntity registerUserEntity) {
         // 用户是否已注册
         UserEntity userEntity = getOne(new QueryWrapper<UserEntity>()

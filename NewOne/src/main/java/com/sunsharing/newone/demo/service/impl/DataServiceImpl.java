@@ -25,14 +25,13 @@ import lombok.extern.log4j.Log4j2;
 public class DataServiceImpl extends ServiceImpl<DataMapper, DataEntity> implements DataService {
 
 
-
     @Override
     public List<DataSearch> getSex() {
 
         // 查询性别列表
         List<DataEntity> dataEntities = list(new QueryWrapper<DataEntity>().eq("KIND", "性别"));
         // 转换格式返回
-        return BeanMapper.mapList(dataEntities,DataEntity.class,DataSearch.class);
+        return BeanMapper.mapList(dataEntities, DataEntity.class, DataSearch.class);
     }
 
     @Override
@@ -40,7 +39,7 @@ public class DataServiceImpl extends ServiceImpl<DataMapper, DataEntity> impleme
         // 查询列表
         List<DataEntity> dataEntities = list(new QueryWrapper<DataEntity>().eq("KIND", "注销状态"));
         // 转换格式返回
-        return BeanMapper.mapList(dataEntities,DataEntity.class,DataSearch.class);
+        return BeanMapper.mapList(dataEntities, DataEntity.class, DataSearch.class);
     }
 
 }

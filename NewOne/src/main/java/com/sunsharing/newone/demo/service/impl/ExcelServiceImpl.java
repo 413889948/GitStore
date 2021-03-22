@@ -19,6 +19,7 @@ import com.sunsharing.newone.demo.entity.db.UserEntity;
 import com.sunsharing.newone.demo.service.ExcelService;
 import com.sunsharing.newone.demo.service.UserService;
 import com.sunsharing.newone.demo.util.PasswordUtil;
+import com.sunsharing.share.boot.framework.code.CodeLoader;
 import com.sunsharing.share.common.base.IdGenerator;
 import com.sunsharing.share.common.base.exception.ShareBusinessException;
 import com.sunsharing.share.common.base.exception.ShareResponseCode;
@@ -62,6 +63,9 @@ public class ExcelServiceImpl implements ExcelService {
 
     @Autowired(required = false)
     AdministrateMapper administrateMapper;
+
+    @Autowired
+    private CodeLoader codeLoader;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -109,8 +113,11 @@ public class ExcelServiceImpl implements ExcelService {
                 if (!StringUtils.isNoneBlank(accountValue, passwordValue, phoneValue, emailValue, sexValue, districtValue)) {
                     throw new ShareBusinessException(ShareResponseCode.VALID_FIELD_NOT_EMPTY);
                 }
+                // 用表码检验用户性别与所属区信息
+                boolean noneBlank = StringUtils.isNoneBlank(codeLoader.getCodeStrToZwIfExists(sexValue, "EN_SEX"), codeLoader.getCodeStrToZwIfExists(districtValue, "EN_DISTRICT"));
                 // 检测用户属性是否符合规范
                 if (!TextValidator.isMobileExact(phoneValue)
+                    || noneBlank
                     || !TextValidator.isEmail(emailValue)
                     || !Pattern.matches("^(?![0-9]+$)(?![a-zA-Z]+$)[0-9a-zA-Z]{8,20}$", passwordValue)) {
                     throw new ShareBusinessException(ShareResponseCode.VALID_FIELD_ILLEGAL);
@@ -121,16 +128,16 @@ public class ExcelServiceImpl implements ExcelService {
                     throw new ShareBusinessException(MyResponseCode.NAME_REPETITION);
                 }
                 String uuid = IdGenerator.uuid2();
-                UserEntity entity =
-                    new UserEntity(uuid,
-                        accountValue,
-                        PasswordUtil.saltEncryptionUtil(EncodeUtil.md5(passwordValue)),
-                        phoneValue,
-                        emailValue,
-                        ae.getUuid(),
-                        ae.getUuid(),
-                        sexValue,
-                        districtValue);
+                UserEntity entity = new UserEntity();
+                entity.setUuid(uuid);
+                entity.setAccount(accountValue);
+                entity.setPassword(PasswordUtil.saltEncryptionUtil(EncodeUtil.md5(passwordValue)));
+                entity.setPhone(phoneValue);
+                entity.setEmail(emailValue);
+                entity.setCreateUserId(ae.getUuid());
+                entity.setUpdateUserId(ae.getUuid());
+                entity.setSex(sexValue);
+                entity.setDistrict(districtValue);
                 if (acStrings.contains(entity.getAccount())) {
                     throw new ShareBusinessException(MyResponseCode.REPEAT_WRONG);
                 }

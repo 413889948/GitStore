@@ -61,12 +61,21 @@ public class LoginServiceImpl extends ServiceImpl<UserMapper, UserEntity> implem
     @Autowired(required = false)
     AdministrateMapper administrateMapper;
 
+    private String sessionVerify = "NEWONE_USER_VERIFY";
+
+    private String sessionUserAccount = "NEWONE_USER_ACCOUNT";
+
+    private String sessionUserKey = "NEWONE_USER_KEY";
+
+    private String sessionUserLogin = "NEWONE_USER_LOGIN_";
+
+
     @Override
     public byte[] getVerify(HttpSession session, HttpServletResponse response) {
         String createText = defaultKaptcha.createText();
         BufferedImage bufferedImage = defaultKaptcha.createImage(createText);
         // 将验证码记录于客户端session内
-        session.setAttribute("NEWONE_USER_VERIFY", createText);
+        session.setAttribute(sessionVerify, createText);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try {
             ImageIO.write(bufferedImage, "jpg", out);
@@ -89,16 +98,17 @@ public class LoginServiceImpl extends ServiceImpl<UserMapper, UserEntity> implem
 
     @Override
     public FlagEntity getVerifySession(HttpSession session) {
-        String userVerify = (String) session.getAttribute("NEWONE_USER_VERIFY");
+        String userVerify = (String) session.getAttribute(sessionVerify);
         return new FlagEntity(StringUtils.isNotEmpty(userVerify));
     }
 
     @Override
     public String userLogin(HttpSession session, UserLoginEntity userLogin) {
         // 获取验证码
-        String verify = (String) session.getAttribute("NEWONE_USER_VERIFY");
-        session.setAttribute("NEWONE_USER_ACCOUNT","");
-        session.setAttribute("NEWONE_USER_KEY","");
+        String verify = (String) session.getAttribute(sessionVerify);
+        session.setAttribute(sessionUserAccount,"");
+        session.setAttribute(sessionUserKey,"");
+        session.setAttribute(sessionUserKey,"");
         String verificationCode = userLogin.getVerificationCode();
         // 验证验证码
         if (!StringUtils.equalsIgnoreCase(verify,verificationCode) && verify != null) {
@@ -120,28 +130,30 @@ public class LoginServiceImpl extends ServiceImpl<UserMapper, UserEntity> implem
                 updateById(userEntity);
                 // 将用户账户与临时key存入session与redis内
                 String key = "2_" + IdGenerator.uuid2();
-                session.setAttribute("NEWONE_USER_ACCOUNT",userEntity.getAccount());
-                session.setAttribute("NEWONE_USER_KEY",key);
-                redisUtil.set("NEWONE_USER_LOGIN_" + userEntity.getAccount(),key);
+                session.setAttribute(sessionUserAccount,userEntity.getAccount());
+                session.setAttribute(sessionUserKey,key);
+                session.setAttribute(sessionUserKey,key);
+                redisUtil.set(sessionUserLogin + userEntity.getAccount(),key);
                 //返回信息
                 return userEntity.getUuid();
             }
         }
         // 将用户账户与临时key存入session与redis内
         String key = "1_" + IdGenerator.uuid2();
-        session.setAttribute("NEWONE_USER_ACCOUNT",administrateEntity.getAccount());
-        session.setAttribute("NEWONE_USER_KEY",key);
-        redisUtil.set("NEWONE_USER_LOGIN_" + administrateEntity.getAccount(),key);
+        session.setAttribute(sessionUserAccount,administrateEntity.getAccount());
+        session.setAttribute(sessionUserKey,key);
+        session.setAttribute(sessionUserKey,key);
+        redisUtil.set(sessionUserLogin + administrateEntity.getAccount(),key);
         //返回信息
         return administrateEntity.getUuid();
     }
 
     @Override
     public TransitionEntity transition(HttpSession session) {
-        String accounnt = (String) session.getAttribute("NEWONE_USER_ACCOUNT");
-        String key = (String) session.getAttribute("NEWONE_USER_KEY");
+        String accounnt = (String) session.getAttribute(sessionUserAccount);
+        String key = (String) session.getAttribute(sessionUserKey);
         //获取redis信息进行验证
-        String keyRedis = redisUtil.get("NEWONE_USER_LOGIN_" + accounnt);
+        String keyRedis = redisUtil.get(sessionUserLogin + accounnt);
         if (StringUtils.isNoneBlank(key,keyRedis) && StringUtils.equals(key,keyRedis)) {
             return new TransitionEntity(true,keyRedis.substring(0,1));
         }
@@ -150,8 +162,9 @@ public class LoginServiceImpl extends ServiceImpl<UserMapper, UserEntity> implem
 
     @Override
     public FlagEntity outLogin(HttpSession session) {
-        session.setAttribute("NEWONE_USER_ACCOUNT","");
-        session.setAttribute("NEWONE_USER_KEY","");
+        session.setAttribute(sessionUserAccount,"");
+        session.setAttribute(sessionUserKey,"");
+        session.setAttribute(sessionUserKey,"");
         return new FlagEntity(true);
     }
 

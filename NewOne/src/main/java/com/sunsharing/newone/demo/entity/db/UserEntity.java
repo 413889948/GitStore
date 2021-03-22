@@ -8,8 +8,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * 用户信息表
@@ -20,31 +22,12 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("t_ec_newone_user")
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public UserEntity(){}
-
-    public UserEntity(String uuid,
-                      String account,
-                      String password,
-                      String phone,
-                      String email,
-                      String createUserId,
-                      String updateUserId,
-                      String sex,
-                      String district) {
-        this.uuid = uuid;
-        this.account = account;
-        this.password = password;
-        this.phone = phone;
-        this.email = email;
-        this.createUserId = createUserId;
-        this.updateUserId = updateUserId;
-        this.sex = sex;
-        this.district = district;
-    }
 
     /**
      * 用户UUID

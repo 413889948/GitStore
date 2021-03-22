@@ -33,6 +33,10 @@ import javax.validation.constraints.Size;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ *
+ * @author Administrator
+ */
 @Configuration
 @EnableConfigurationProperties(DemoProperties.class)
 @Slf4j

@@ -5,16 +5,19 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sunsharing.newone.demo.constant.enums.MyResponseCode;
 import com.sunsharing.newone.demo.dao.mapper.AdministrateMapper;
 import com.sunsharing.newone.demo.dao.mapper.UserMapper;
+import com.sunsharing.newone.demo.entity.data.RegisterUserEntity;
 import com.sunsharing.newone.demo.entity.db.AdministrateEntity;
 import com.sunsharing.newone.demo.entity.db.UserEntity;
 import com.sunsharing.newone.demo.entity.query.user.UserCreate;
 import com.sunsharing.newone.demo.entity.query.user.UserDetail;
 import com.sunsharing.newone.demo.entity.query.user.UserModify;
+import com.sunsharing.newone.demo.service.RegisterService;
 import com.sunsharing.newone.demo.service.UserService;
 import com.sunsharing.newone.demo.util.PasswordUtil;
 import com.sunsharing.share.boot.framework.code.CodeLoader;
 import com.sunsharing.share.common.base.IdGenerator;
 import com.sunsharing.share.common.base.exception.ShareBusinessException;
+import com.sunsharing.share.common.base.exception.ShareResponseCode;
 import com.sunsharing.share.common.mapper.BeanMapper;
 import com.sunsharing.share.common.text.TextValidator;
 
@@ -45,12 +48,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     @Autowired(required = false)
     private AdministrateMapper administrateMapper;
 
+    @Autowired
+    private RegisterService register;
+
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public String addUser(UserCreate obj,HttpSession session) {
+    public String addUser(UserCreate obj, HttpSession session) {
         UserEntity userEntity = getOne(new QueryWrapper<UserEntity>()
-            .eq("ACCOUNT",obj.getAccount()));
+            .eq("ACCOUNT", obj.getAccount()));
         if (userEntity != null) {
+            throw new ShareBusinessException(MyResponseCode.NAME_REPETITION);
+        }
+        AdministrateEntity administrateEntity = administrateMapper.selectOne(new QueryWrapper<AdministrateEntity>()
+            .eq("ACCOUNT", obj.getAccount()));
+        if (administrateEntity != null) {
             throw new ShareBusinessException(MyResponseCode.NAME_REPETITION);
         }
         UserEntity entity = BeanMapper.map(obj, UserEntity.class);
@@ -73,17 +84,29 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean addUserList(List<UserEntity> objList) {
-        return saveBatch(objList);
+        UserEntity userEntity = objList.get(0);
+        RegisterUserEntity registerUserEntity = new RegisterUserEntity();
+        RegisterUserEntity map = BeanMapper.map(userEntity, registerUserEntity);
+        map.setRole("common");
+        String id = register.registerUser(map);
+        if (id == null) {
+            log.error("注册过程出现异常");
+            throw new ShareBusinessException(ShareResponseCode.INNER_SYSTEM_ERROR);
+        }
+        return true;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public String updateUser(UserModify obj,HttpSession session) {
+    public String updateUser(UserModify obj, HttpSession session) {
         String id = obj.getUuid();
         UserEntity entity = getById(id);
-        BeanMapper.map(obj, entity);
-        TextValidator.isMobileExact(entity.getPhone());
-        TextValidator.isEmail(entity.getEmail());
+        boolean mobileExact = TextValidator.isMobileExact(entity.getPhone());
+        boolean email = TextValidator.isEmail(entity.getEmail());
+        if (!email || !mobileExact) {
+            log.error("核验信息错误");
+            throw new ShareBusinessException(ShareResponseCode.INPUT_ILLEGAL);
+        }
         String account = (String) session.getAttribute("NEWONE_USER_ACCOUNT");
         AdministrateEntity ae = administrateMapper.selectOne(new QueryWrapper<AdministrateEntity>().eq("ACCOUNT", account));
         entity.setUpdateUserId(ae.getUuid());

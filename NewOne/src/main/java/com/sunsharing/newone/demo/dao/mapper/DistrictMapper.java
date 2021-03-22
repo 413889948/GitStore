@@ -6,6 +6,8 @@ import com.sunsharing.newone.demo.entity.query.district.DistrictSearch;
 import com.sunsharing.newone.demo.entity.query.district.DistrictSearchResult;
 import com.sunsharing.share.list.anno.ShareList;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import java.util.List;
 
 /**
@@ -14,6 +16,8 @@ import java.util.List;
  * @author admin
  * @since 2021-02-02 00:23:07
  */
+@Mapper
+
 public interface DistrictMapper extends BaseMapper<DistrictEntity> {
 
     @ShareList(schemeId = "newOne/district", transer = {

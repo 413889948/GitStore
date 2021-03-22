@@ -1,0 +1,36 @@
+/*!
+ * @(#) CardItem.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2021
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author wangzg
+ * <br> 2021-01-08 16:34:12
+ */
+$borderColor: #d9d9d9;
+// 以下是 demo 卡片样式
+.card {
+    padding: 15px;
+    border-top: 1px solid $borderColor;
+    border-bottom: 1px solid $borderColor;
+    background: #fff;
+    img {
+        width:  69px;
+        height: 69px;
+    }
+    .name {
+        font-size: 16px;
+        color: #000;
+        margin-bottom: 8px;
+    }
+    .info {
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+    .location {
+        color: rgba(0, 0, 0, 0.64);
+    }
+    .action {
+
+    }
+}

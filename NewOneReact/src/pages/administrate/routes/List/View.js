@@ -11,7 +11,10 @@ import {transition} from "@/pages/administrate/routes/AddUser/hooks";
 import Dialog from "@/components/Dialog/Dialog";
 import produce from 'immer';
 
-Network.setExceptionHandle((error, abort) => {
+Network.setExceptionHandle( (error, abort) => {
+    if ("[报文解析为json异常][status=-1][SyntaxError: Unexpected token '<']"!==error.message) {
+        Dialog.alert(error.message);
+    }
     abort();//直接中断后续的Promise
 
 });

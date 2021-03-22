@@ -13,7 +13,6 @@ package com.sunsharing.newone.demo;
 import com.sunsharing.share.boot.framework.annotation.EnableFrameWork;
 import com.sunsharing.share.webex.annotation.EnableShareRestClient;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -26,7 +25,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFrameWork
 @EnableDiscoveryClient
 @EnableFeignClients
-@MapperScan(basePackages = "com.sunsharing.newone.demo.dao.mapper")
 @EnableShareRestClient(basePackage = "com.sunsharing.newone.demo")
 public class DemoApplication {
 

@@ -54,6 +54,9 @@ module.exports = {
         '/newOne/**':{
             target: `http://${development.server}:${development.port}`,
         },
+        '/tEcNewoneDistrict/**':{
+            target: `http://${development.server}:${development.port}`,
+        },
         '/mockApi': {
             target: `http://${yapi.server}:${yapi.port}/mock/${yapi.projectId}`,
             pathRewrite: { '^/mockApi': '' }

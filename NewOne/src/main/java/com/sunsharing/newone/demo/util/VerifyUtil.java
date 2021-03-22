@@ -18,17 +18,23 @@ import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
+
 /**
  * @author 黄祎翔
- * @time 2021/1/6 11:16
+ * @create: 2021/3/12 10:51
+ * @description: 验证码生成工具
  */
 @Component
 public class VerifyUtil {
 
+    /**
+     * 设定验证码格式的工具
+     * @return 注入的验证码格式
+     */
     @Bean
-    public DefaultKaptcha getDDefaultKaptcha() {
+    public DefaultKaptcha getDefault() {
 
-        DefaultKaptcha dk = new DefaultKaptcha();
+
         Properties properties = new Properties();
         // 图片边框
         properties.setProperty("kaptcha.border", "yes");
@@ -49,8 +55,10 @@ public class VerifyUtil {
         // 字体
         properties.setProperty("kaptcha.textproducer.font.names", "宋体,楷体,微软雅黑");
         Config config = new Config(properties);
-        dk.setConfig(config);
 
-        return dk;
+        DefaultKaptcha defaultKaptcha = new DefaultKaptcha();
+        defaultKaptcha.setConfig(config);
+
+        return defaultKaptcha;
     }
 }

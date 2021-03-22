@@ -21,5 +21,10 @@ import com.sunsharing.newone.demo.entity.db.UserEntity;
 public interface RegisterService extends IService<UserEntity> {
 
 
+    /**
+     * 注册用户
+     * @param registerUserEntity 注册相关信息
+     * @return 注册id
+     */
     String registerUser(RegisterUserEntity registerUserEntity);
 }

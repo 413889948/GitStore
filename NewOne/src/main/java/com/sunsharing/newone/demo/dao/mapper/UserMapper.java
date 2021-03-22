@@ -7,6 +7,8 @@ import com.sunsharing.newone.demo.entity.query.user.UserSearchResult;
 import com.sunsharing.share.list.anno.ShareList;
 import com.sunsharing.share.list.anno.Transer;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import java.util.List;
 
 /**
@@ -15,6 +17,8 @@ import java.util.List;
  * @author admin
  * @since 2021-01-29 17:14:48
  */
+@Mapper
+
 public interface UserMapper extends BaseMapper<UserEntity> {
 
     @ShareList(schemeId = "newOne/user", transer = {
